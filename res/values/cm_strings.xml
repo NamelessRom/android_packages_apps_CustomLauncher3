@@ -16,7 +16,9 @@
 -->
 <resources>
     <!-- Application name -->
-    <string name="cm_application_name" translatable="false">Trebuchet</string>
+    <string name="cm_application_name" translatable="false">CustomLauncher3</string>
+    <!-- App copyright -->
+    <string name="application_copyright" translatable="false">Copyright \u00A9 2014 The CyanogenMod Project\nModifications Copyright \u00A9 2014 The NamelessRom Project</string>
     <!-- App version -->
     <string name="application_version" translatable="false">1.0</string>
 

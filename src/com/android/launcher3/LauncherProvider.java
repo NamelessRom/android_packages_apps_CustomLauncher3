@@ -789,12 +789,12 @@ public class LauncherProvider extends ContentProvider {
                 }
             }
 
-            // This was the old L2-based Trebuchet's version. Do steps that come after version 12 
+            // This was the old L2-based CustomLauncher3's version. Do steps that come after version 12
             // (Launcher2's original version) so the new things get added, but skip the intermediate
             // workspaceScreens updates (addWorkspacesTable() takes care of that)
 
             if (version == 16) {
-                Log.w(TAG, "Found pre-11 Trebuchet, preparing update");
+                Log.w(TAG, "Found pre-11 CustomLauncher3, preparing update");
 
                 // With the new shrink-wrapped and re-orderable workspaces, it makes sense
                 // to persist workspace screens and their relative order.
@@ -848,7 +848,7 @@ public class LauncherProvider extends ContentProvider {
             }
 
             // Artificially inflate the version to make sure we're fully up to date
-            // after a possible 10.2-Trebuchet migration
+            // after a possible 10.2-CustomLauncher3 migration
 
             if (version == 15) {
                 version = 17;

@@ -38,3 +38,6 @@ build/
 
 # Others
 .DS_Store
+.idea/
+*.iml
+gen/
