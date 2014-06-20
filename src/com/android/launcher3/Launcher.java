@@ -56,7 +56,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -245,8 +244,6 @@ public class Launcher extends Activity
     private static int NEW_APPS_PAGE_MOVE_DELAY = 500;
     private static int NEW_APPS_ANIMATION_INACTIVE_TIMEOUT_SECONDS = 5;
     private static int NEW_APPS_ANIMATION_DELAY = 500;
-
-    private boolean mGelIntegrationEnabled = false;
 
     private final BroadcastReceiver mCloseSystemDialogsReceiver
             = new CloseSystemDialogsIntentReceiver();
@@ -565,7 +562,7 @@ public class Launcher extends Activity
 
         mHotwordServiceClient = new HotwordServiceClient(this);
 
-        restoreGelSetting();
+        restoreCustomContentMode();
 
         if (PROFILE_STARTUP) {
             android.os.Debug.stopMethodTracing();
@@ -624,10 +621,11 @@ public class Launcher extends Activity
         getContentResolver().registerContentObserver(Settings.Global.CONTENT_URI, true, obs);
     }
 
-    public void restoreGelSetting() {
-        mGelIntegrationEnabled = SettingsProvider.getBoolean(this,
-                SettingsProvider.SETTINGS_UI_HOMESCREEN_SEARCH_SCREEN_LEFT,
-                R.bool.preferences_interface_homescreen_search_screen_left_default);
+    public void restoreCustomContentMode() {
+        mCustomContentMode = CustomContentMode.getModeForValue(
+                SettingsProvider.getIntCustomDefault(this,
+                SettingsProvider.SETTINGS_UI_HOMESCREEN_SEARCH_PANEL_LEFT,
+                CustomContentMode.DISABLED.getValue()));
     }
 
     void initializeDynamicGrid() {
@@ -638,7 +636,7 @@ public class Launcher extends Activity
                 SettingsProvider.SETTINGS_UI_HOMESCREEN_HIDE_ICON_LABELS,
                 R.bool.preferences_interface_homescreen_hide_icon_labels_default);
 
-        restoreGelSetting();
+        restoreCustomContentMode();
 
         // Determine the dynamic grid properties
         Point smallestSize = new Point();
@@ -672,7 +670,23 @@ public class Launcher extends Activity
     }
 
     protected boolean hasCustomContentToLeft() {
-       return isGelIntegrationSupported() && isGelIntegrationEnabled();
+        switch(getCustomContentMode()) {
+            case GEL:
+                return isGelIntegrationSupported();
+            case CUSTOM_HOME:
+                return isCustomHomeActive();
+            default:
+                return false;
+        }
+    }
+
+    /**
+     * Returns true if the custom home application is initialized and ready
+     * for the user to scroll to it. To be implemented by subclasses.
+     * @return True if the custom home view is initialized.
+     */
+    protected boolean isCustomHomeActive() {
+        return false;
     }
 
     public boolean isGelIntegrationSupported() {
@@ -685,12 +699,16 @@ public class Launcher extends Activity
         return globalSearchActivity != null && isCM();
     }
 
-    public boolean isGelIntegrationEnabled() {
-        return mGelIntegrationEnabled;
+    public CustomContentMode getCustomContentMode() {
+        return mCustomContentMode;
+    }
+
+    public void setCustomContentMode(CustomContentMode customContentMode) {
+        mCustomContentMode = customContentMode;
     }
 
     public void onCustomContentLaunch() {
-        if(isGelIntegrationEnabled() && isGelIntegrationSupported()) {
+        if(isCustomContentModeGel() && isGelIntegrationSupported()) {
             GelIntegrationHelper.getInstance().registerSwipeBackGestureListenerAndStartGel(this, mWorkspace.isLayoutRtl());
         }
     }
@@ -1143,10 +1161,9 @@ public class Launcher extends Activity
         }
         super.onResume();
 
-
         updateGridIfNeeded();
 
-        if(isGelIntegrationEnabled() && isGelIntegrationSupported()) {
+        if(isCustomContentModeGel() && isGelIntegrationSupported()) {
             GelIntegrationHelper.getInstance().handleGelResume();
         }
 
@@ -1306,6 +1323,10 @@ public class Launcher extends Activity
         if (isSearchBarEnabled()) {
             getQsbBar().animate().translationY(0).start();
         }
+    }
+
+    protected boolean isCustomContentModeGel() {
+        return mCustomContentMode == CustomContentMode.GEL;
     }
 
     public interface CustomContentCallbacks {
