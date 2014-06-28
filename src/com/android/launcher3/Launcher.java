@@ -1216,6 +1216,7 @@ public class Launcher extends Activity
         public void setScrollY(int scroll) {
             scrollY = scroll;
 
+            // Be careful of feature check isSearchBarEnabled
             if (mWorkspace.isOnOrMovingToCustomContent()) {
                 mSearchDropTargetBar.setTranslationY(- scrollY);
                 getQsbBar().setTranslationY(-scrollY);
@@ -1225,7 +1226,9 @@ public class Launcher extends Activity
 
     public void resetQSBScroll() {
         mSearchDropTargetBar.animate().translationY(0).start();
-        getQsbBar().animate().translationY(0).start();
+        if (isSearchBarEnabled()) {
+            getQsbBar().animate().translationY(0).start();
+        }
     }
 
     public interface CustomContentCallbacks {
@@ -4948,6 +4951,12 @@ public class Launcher extends Activity
         // Synchronized reload
         mModel.startLoader(true, mWorkspace.getCurrentPage());
         mWorkspace.updateCustomContentVisibility();
+    }
+
+    public boolean isSearchBarEnabled() {
+        return SettingsProvider.getBoolean(this,
+                SettingsProvider.SETTINGS_UI_HOMESCREEN_SEARCH,
+                R.bool.preferences_interface_homescreen_search_default);
     }
 }
 
