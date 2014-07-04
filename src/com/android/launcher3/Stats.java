@@ -29,7 +29,7 @@ public class Stats {
     private static final boolean DEBUG_BROADCASTS = false;
     private static final String TAG = "Launcher3/Stats";
 
-    private static final boolean LOCAL_LAUNCH_LOG = true;
+    private static final boolean LOCAL_LAUNCH_LOG = false;
 
     public static final String ACTION_LAUNCH = "com.android.launcher3.action.LAUNCH";
     public static final String PERM_LAUNCH = "com.android.launcher3.permission.RECEIVE_LAUNCH_BROADCASTS";
