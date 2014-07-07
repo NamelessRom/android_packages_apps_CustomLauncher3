@@ -289,7 +289,7 @@ public class Launcher extends Activity
 
     private View mAllAppsButton;
 
-    private SearchDropTargetBar mSearchDropTargetBar;
+    protected SearchDropTargetBar mSearchDropTargetBar;
     private AppsCustomizeLayout mAppsCustomizeLayout;
     private AppsCustomizePagedView mAppsCustomizeContent;
     private boolean mAutoAdvanceRunning = false;
@@ -307,6 +307,8 @@ public class Launcher extends Activity
     private SpannableStringBuilder mDefaultKeySsb = null;
 
     private boolean mWorkspaceLoading = true;
+
+    private boolean mDynamicGridUpdateRequired = false;
 
     private boolean mPaused = true;
     private boolean mRestoring;
@@ -431,8 +433,6 @@ public class Launcher extends Activity
         public void onReceive(Context context, Intent intent) {
             // Update the workspace
             updateDynamicGrid();
-            mWorkspace.hideOutlines();
-            mSearchDropTargetBar.showSearchBar(false);
         }
     };
 
@@ -1066,6 +1066,9 @@ public class Launcher extends Activity
         }
         super.onResume();
 
+
+        updateGridIfNeeded();
+
         if(isGelIntegrationEnabled() && isGelIntegrationSupported()) {
             GelIntegrationHelper.getInstance().handleGelResume();
         }
@@ -1204,9 +1207,6 @@ public class Launcher extends Activity
         if (mWorkspace.getCustomContentCallbacks() != null) {
             mWorkspace.getCustomContentCallbacks().onHide();
         }
-
-        //Reset the OverviewPanel position
-        ((SlidingUpPanelLayout) mOverviewPanel).collapsePane();
     }
 
     QSBScroller mQsbScroller = new QSBScroller() {
@@ -2131,6 +2131,8 @@ public class Launcher extends Activity
             startTime = System.currentTimeMillis();
         }
         super.onNewIntent(intent);
+
+        updateGridIfNeeded();
 
         // Close the menu
         if (Intent.ACTION_MAIN.equals(intent.getAction())) {
@@ -4940,17 +4942,30 @@ public class Launcher extends Activity
     }
 
     public void updateDynamicGrid() {
-        mSearchDropTargetBar.setupQSB(this);
-        mSearchDropTargetBar.hideSearchBar(false);
+        mSearchDropTargetBar.setupQSB(Launcher.this);
 
         initializeDynamicGrid();
 
-        mGrid.layout(this);
-        mWorkspace.showOutlines();
+        mGrid.layout(Launcher.this);
 
         // Synchronized reload
         mModel.startLoader(true, mWorkspace.getCurrentPage());
         mWorkspace.updateCustomContentVisibility();
+
+    }
+
+    public void setUpdateDynamicGrid() {
+        mDynamicGridUpdateRequired = true;
+    }
+
+    public boolean updateGridIfNeeded() {
+        if (mDynamicGridUpdateRequired) {
+            updateDynamicGrid();
+            mDynamicGridUpdateRequired = false;
+            return true;
+        }
+
+        return false;
     }
 
     public boolean isSearchBarEnabled() {
