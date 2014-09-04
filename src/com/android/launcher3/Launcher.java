@@ -105,8 +105,6 @@ import com.android.launcher3.DropTarget.DragObject;
 import com.android.launcher3.PagedView.TransitionEffect;
 import com.android.launcher3.settings.SettingsProvider;
 
-import com.google.android.hotword.client.HotwordServiceClient;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -380,8 +378,6 @@ public class Launcher extends Activity
 
     private BubbleTextView mWaitingForResume;
 
-    private HotwordServiceClient mHotwordServiceClient;
-
     public enum CustomContentMode {
         DISABLED(0),
         GEL(1),
@@ -559,8 +555,6 @@ public class Launcher extends Activity
 
         mSavedState = savedInstanceState;
         restoreState(mSavedState);
-
-        mHotwordServiceClient = new HotwordServiceClient(this);
 
         restoreCustomContentMode();
 
@@ -1280,8 +1274,6 @@ public class Launcher extends Activity
         } else {
             mHiddenFolderAuth = false;
         }
-
-        mHotwordServiceClient.requestHotwordDetection(true);
     }
 
     @Override
@@ -1293,8 +1285,6 @@ public class Launcher extends Activity
         mPaused = true;
         mDragController.cancelDrag();
         mDragController.resetLastGestureUpTime();
-
-        mHotwordServiceClient.requestHotwordDetection(false);
 
         // We call onHide() aggressively. The custom content callbacks should be able to
         // debounce excess onHide calls.
@@ -2026,9 +2016,6 @@ public class Launcher extends Activity
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
 
-        mHotwordServiceClient.onAttachedToWindow();
-        mHotwordServiceClient.requestHotwordDetection(true);
-
         // Listen for broadcasts related to user-presence
         final IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_SCREEN_OFF);
@@ -2047,9 +2034,6 @@ public class Launcher extends Activity
     public void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         mVisible = false;
-
-        mHotwordServiceClient.onDetachedFromWindow();
-        mHotwordServiceClient.requestHotwordDetection(false);
 
         if (mAttached) {
             unregisterReceiver(mReceiver);
