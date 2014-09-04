@@ -103,6 +103,7 @@ import android.widget.Toast;
 import com.android.launcher.home.Home;
 import com.android.launcher3.DropTarget.DragObject;
 import com.android.launcher3.PagedView.TransitionEffect;
+import com.android.launcher3.nameless.GestureFragment;
 import com.android.launcher3.settings.SettingsProvider;
 
 import java.io.DataInputStream;
@@ -260,6 +261,7 @@ public class Launcher extends Activity
     private DynamicGridSizeFragment mDynamicGridSizeFragment;
     private LauncherClings mLauncherClings;
     protected HiddenFolderFragment mHiddenFolderFragment;
+    private GestureFragment mGestureFragment;
 
     private AppWidgetManager mAppWidgetManager;
     private LauncherAppWidgetHost mAppWidgetHost;
@@ -1264,6 +1266,10 @@ public class Launcher extends Activity
             mDynamicGridSizeFragment.setSize();
             mWorkspace.hideOutlines();
         }
+        f = getFragmentManager().findFragmentByTag(GestureFragment.TAG);
+        if (f != null) {
+            mGestureFragment.setGestureDone();
+        }
         Fragment f1 = getFragmentManager().findFragmentByTag(
                 HiddenFolderFragment.HIDDEN_FOLDER_FRAGMENT);
         if (f1 != null && !mHiddenFolderAuth) {
@@ -1426,6 +1432,16 @@ public class Launcher extends Activity
         fragmentTransaction.commit();
     }
 
+    public void onClickGestureButton() {
+        final FragmentManager fragmentManager = getFragmentManager();
+        final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        mGestureFragment = new GestureFragment();
+        fragmentTransaction.setCustomAnimations(0, 0);
+        fragmentTransaction.replace(R.id.launcher, mGestureFragment, GestureFragment.TAG);
+        fragmentTransaction.commit();
+    }
+
     public void setTransitionEffect(boolean pageOrDrawer, String newTransitionEffect) {
         String mSettingsProviderValue = pageOrDrawer ?
                 SettingsProvider.SETTINGS_UI_DRAWER_SCROLLING_TRANSITION_EFFECT
@@ -1450,6 +1466,17 @@ public class Launcher extends Activity
         mDarkPanel.setVisibility(View.VISIBLE);
         ObjectAnimator anim = ObjectAnimator.ofFloat(
                 mDarkPanel, "alpha", 0.3f, 0.0f);
+        anim.start();
+        anim.addListener(mAnimatorListener);
+    }
+
+    public void setGestureDone() {
+        final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(0, R.anim.exit_out_right);
+        fragmentTransaction.remove(mGestureFragment).commit();
+
+        mDarkPanel.setVisibility(View.VISIBLE);
+        ObjectAnimator anim = ObjectAnimator.ofFloat(mDarkPanel, "alpha", 0.3f, 0.0f);
         anim.start();
         anim.addListener(mAnimatorListener);
     }
@@ -2769,10 +2796,13 @@ public class Launcher extends Activity
                     TransitionEffectsFragment.TRANSITION_EFFECTS_FRAGMENT);
             Fragment f2 = getFragmentManager().findFragmentByTag(
                     DynamicGridSizeFragment.DYNAMIC_GRID_SIZE_FRAGMENT);
+            Fragment f3 = getFragmentManager().findFragmentByTag(GestureFragment.TAG);
             if (f != null) {
                 mTransitionEffectsFragment.setEffect();
             } else if (f2 != null) {
                 mDynamicGridSizeFragment.setSize();
+            } else if (f3 != null) {
+                mGestureFragment.setGestureDone();
             } else {
                 mWorkspace.exitOverviewMode(true);
             }

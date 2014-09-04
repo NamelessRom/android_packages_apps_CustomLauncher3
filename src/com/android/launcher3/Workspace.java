@@ -52,6 +52,7 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.Choreographer;
 import android.view.Display;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,6 +69,8 @@ import com.android.launcher3.FolderIcon.FolderRingAnimator;
 import com.android.launcher3.Launcher.CustomContentCallbacks;
 import com.android.launcher3.LauncherSettings.Favorites;
 import com.android.launcher3.backup.BackupProtos;
+import com.android.launcher3.nameless.ActionProcessor;
+import com.android.launcher3.nameless.GestureFragment;
 import com.android.launcher3.settings.SettingsProvider;
 
 import java.util.ArrayList;
@@ -295,6 +298,25 @@ public class Workspace extends SmoothPagedView
     private boolean mShowOutlines;
     private boolean mHideIconLabels;
 
+    // Gestures
+    private GestureDetector mGestureDetector;
+
+    private class CustomGestureListener extends GestureDetector.SimpleOnGestureListener {
+
+        @Override
+        public boolean onDown(final MotionEvent event) {
+            return true;
+        }
+
+        @Override
+        public boolean onDoubleTap(final MotionEvent e) {
+            final int type = SettingsProvider.getIntCustomDefault(getContext(),
+                    GestureFragment.TYPE_DOUBLE_TAP, ActionProcessor.ACTION_NOTHING);
+            ActionProcessor.processAction(getContext(), type);
+            return true;
+        }
+    }
+
     /**
      * Used to inflate the Workspace from XML.
      *
@@ -364,6 +386,9 @@ public class Workspace extends SmoothPagedView
         // Disable multitouch across the workspace/all apps/customize tray
         setMotionEventSplittingEnabled(true);
         setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
+
+        // detect gestures
+        mGestureDetector = new GestureDetector(context, new CustomGestureListener());
     }
 
     @Override
@@ -1121,6 +1146,10 @@ public class Workspace extends SmoothPagedView
                 }
             }
         }
+
+        // send motion events to our gesture detector
+        mGestureDetector.onTouchEvent(ev);
+
         return super.onInterceptTouchEvent(ev);
     }
 

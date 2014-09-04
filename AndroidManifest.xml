@@ -25,7 +25,7 @@
 
     <original-package android:name="com.android.launcher3" />
 
-    <uses-sdk android:targetSdkVersion="19" android:minSdkVersion="17"/>
+    <uses-sdk android:targetSdkVersion="19" android:minSdkVersion="19"/>
 
     <permission
         android:name="com.android.launcher3.permission.PRELOAD_WORKSPACE"
@@ -75,6 +75,9 @@
     <uses-permission android:name="com.android.launcher3.permission.WRITE_SETTINGS" />
     <uses-permission android:name="com.android.launcher3.permission.RECEIVE_LAUNCH_BROADCASTS" />
     <uses-permission android:name="cyanogenmod.permission.PROTECTED_APP" />
+
+    <!-- Additions -->
+    <uses-permission android:name="android.permission.DEVICE_POWER" />
 
     <application
         android:name="com.android.launcher3.LauncherApplication"
