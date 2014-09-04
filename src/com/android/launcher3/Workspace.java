@@ -57,6 +57,7 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.Choreographer;
 import android.view.Display;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,6 +77,8 @@ import com.android.launcher3.LauncherSettings.Favorites;
 import com.android.launcher3.compat.PackageInstallerCompat;
 import com.android.launcher3.compat.PackageInstallerCompat.PackageInstallInfo;
 import com.android.launcher3.compat.UserHandleCompat;
+import com.android.launcher3.nameless.ActionProcessor;
+import com.android.launcher3.nameless.GestureFragment;
 import com.android.launcher3.settings.SettingsProvider;
 
 import java.util.ArrayList;
@@ -308,6 +311,110 @@ public class Workspace extends SmoothPagedView
     private boolean mShowOutlines;
     private boolean mHideIconLabels;
 
+    // Gestures
+    private GestureDetector mGestureDetector;
+    private final CustomGestureListener mGestureListener = new CustomGestureListener();
+
+    private final ActionProcessor.ActionListener mActionListener =
+            new ActionProcessor.ActionListener() {
+                @Override
+                public void turnScreenOff() {
+                    ActionProcessor.turnScreenOff(getContext());
+                }
+
+                @Override
+                public void collapseStatusBar() {
+                    ActionProcessor.collapseStatusBar(getContext());
+                }
+
+                @Override
+                public void toggleTorch() {
+                    ActionProcessor.toggleTorch(getContext());
+                }
+
+                @Override
+                public void toggleSilentMode() {
+                    ActionProcessor.toggleSilentMode(getContext());
+                }
+
+                @Override
+                public void musicPlayPause() {
+                    ActionProcessor.musicPlayPause(getContext());
+                }
+
+                @Override
+                public void musicPrevious() {
+                    ActionProcessor.musicPrevious(getContext());
+                }
+
+                @Override
+                public void musicNext() {
+                    ActionProcessor.musicNext(getContext());
+                }
+
+            };
+
+    public class CustomGestureListener extends GestureDetector.SimpleOnGestureListener {
+
+        private static final int SWIPE_MIN_DISTANCE = 120;
+        private static final int SWIPE_MAX_OFF_PATH = 250;
+        private static final int SWIPE_THRESHOLD_VELOCITY = 200;
+
+        public boolean onLongPress() {
+            final int type = SettingsProvider.getIntCustomDefault(getContext(),
+                    GestureFragment.TYPE_LONG_PRESS, ActionProcessor.ACTION_NOTHING);
+            if (ActionProcessor.ACTION_NOTHING == type) {
+                return false;
+            }
+            ActionProcessor.processAction(mActionListener, type);
+            return true;
+        }
+
+        @Override
+        public boolean onDown(final MotionEvent event) {
+            return true;
+        }
+
+        @Override
+        public boolean onDoubleTap(final MotionEvent e) {
+            final int type = SettingsProvider.getIntCustomDefault(getContext(),
+                    GestureFragment.TYPE_DOUBLE_TAP, ActionProcessor.ACTION_NOTHING);
+            ActionProcessor.processAction(mActionListener, type);
+            return true;
+        }
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            try {
+                if (Math.abs(e1.getX() - e2.getX()) > SWIPE_MAX_OFF_PATH){
+                    return false;
+                }
+                // bottom to top swipe
+                if (e1.getY() - e2.getY() > SWIPE_MIN_DISTANCE
+                        && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
+                    final int type = SettingsProvider.getIntCustomDefault(getContext(),
+                            GestureFragment.TYPE_SWIPE_UP, ActionProcessor.ACTION_NOTHING);
+                    ActionProcessor.processAction(mActionListener, type);
+                }
+                // top to bottom swipe
+                else if (e2.getY() - e1.getY() > SWIPE_MIN_DISTANCE
+                        && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
+                    final int type = SettingsProvider.getIntCustomDefault(getContext(),
+                            GestureFragment.TYPE_SWIPE_DOWN, ActionProcessor.ACTION_NOTHING);
+                    ActionProcessor.processAction(mActionListener, type);
+                }
+            } catch (Exception e) {
+                return false;
+            }
+            return true;
+        }
+
+    }
+
+    public CustomGestureListener getGestureListener() {
+        return mGestureListener;
+    }
+
     /**
      * Used to inflate the Workspace from XML.
      *
@@ -378,6 +485,9 @@ public class Workspace extends SmoothPagedView
         // Disable multitouch across the workspace/all apps/customize tray
         setMotionEventSplittingEnabled(true);
         setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
+
+        // detect gestures
+        mGestureDetector = new GestureDetector(context, mGestureListener);
     }
 
     @Override
@@ -1151,6 +1261,10 @@ public class Workspace extends SmoothPagedView
                 }
             }
         }
+
+        // send motion events to our gesture detector
+        mGestureDetector.onTouchEvent(ev);
+
         return super.onInterceptTouchEvent(ev);
     }
 

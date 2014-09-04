@@ -19,4 +19,22 @@
     <string name="nameless_application_name">CustomLauncher3</string>
     <!-- App copyright -->
     <string name="application_copyright">Copyright \u00A9 2014 The CyanogenMod Project\nModifications Copyright \u00A9 2014 The NamelessRom Project</string>
+
+    <!-- Gestures -->
+    <string name="gesture_settings">Gestures</string>
+    <string name="gesture_choose">Choose action</string>
+    <!-- Gesture triggers -->
+    <string name="gesture_double_tap">Double tap</string>
+    <string name="gesture_long_press">Long press</string>
+    <string name="gesture_swipe_down">Swipe down</string>
+    <string name="gesture_swipe_up">Swipe up</string>
+    <!-- Gesture actions -->
+    <string name="gesture_nothing">Nothing</string>
+    <string name="gesture_turn_screen_off">Turn screen off</string>
+    <string name="gesture_expand_statusbar">Expand status bar</string>
+    <string name="gesture_toggle_torch">Toggle torch</string>
+    <string name="gesture_toggle_silent_mode">Toggle silent mode</string>
+    <string name="gesture_music_play_pause">Play/Pause music</string>
+    <string name="gesture_music_previous">Previous song</string>
+    <string name="gesture_music_next">Next song</string>
 </resources>

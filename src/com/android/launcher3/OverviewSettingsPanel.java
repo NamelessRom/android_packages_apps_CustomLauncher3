@@ -46,7 +46,8 @@ public class OverviewSettingsPanel {
                 res.getString(R.string.scroll_effect_text),
                 res.getString(R.string.icon_labels),
                 res.getString(R.string.scrolling_wallpaper),
-                res.getString(R.string.grid_size_text)};
+                res.getString(R.string.grid_size_text),
+                res.getString(R.string.gesture_settings)};
 
         String[] valuesDrawer = new String[] {
                 res.getString(R.string.scroll_effect_text),

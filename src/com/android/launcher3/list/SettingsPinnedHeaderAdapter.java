@@ -281,7 +281,9 @@ public class SettingsPinnedHeaderAdapter extends PinnedHeaderListAdapter {
                         case 4:
                             mLauncher.onClickDynamicGridSizeButton();
                             break;
-
+                        case 5:
+                            mLauncher.onClickGestureButton();
+                            break;
                     }
                     break;
                 case OverviewSettingsPanel.DRAWER_SETTINGS_POSITION:
@@ -370,4 +372,5 @@ public class SettingsPinnedHeaderAdapter extends PinnedHeaderListAdapter {
 
         notifyDataSetChanged();
     }
+
 }
