@@ -18,14 +18,16 @@
  */
 package com.android.launcher3.nameless;
 
+import android.app.StatusBarManager;
 import android.content.Context;
 import android.os.PowerManager;
 import android.os.SystemClock;
 
 public class ActionProcessor {
 
-    public static final int ACTION_NOTHING         = 0;
-    public static final int ACTION_TURN_SCREEN_OFF = 1;
+    public static final int ACTION_NOTHING          = 0;
+    public static final int ACTION_TURN_SCREEN_OFF  = 1;
+    public static final int ACTION_EXPAND_STATUSBAR = 2;
 
     public static void processAction(final Context context, final int type) {
         switch (type) {
@@ -35,12 +37,21 @@ public class ActionProcessor {
             case ACTION_TURN_SCREEN_OFF:
                 turnScreenOff(context);
                 break;
+            case ACTION_EXPAND_STATUSBAR:
+                collapseStatusBar(context);
+                break;
         }
     }
 
     public static void turnScreenOff(final Context context) {
         final PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         pm.goToSleep(SystemClock.uptimeMillis());
+    }
+
+    public static void collapseStatusBar(final Context context) {
+        final StatusBarManager sb = (StatusBarManager) context
+                .getSystemService(Context.STATUS_BAR_SERVICE);
+        sb.expandNotificationsPanel();
     }
 
 }

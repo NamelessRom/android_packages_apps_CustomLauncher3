@@ -78,6 +78,7 @@
 
     <!-- Additions -->
     <uses-permission android:name="android.permission.DEVICE_POWER" />
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
 
     <application
         android:name="com.android.launcher3.LauncherApplication"

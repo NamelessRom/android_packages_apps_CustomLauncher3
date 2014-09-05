@@ -199,6 +199,8 @@ public class GestureFragment extends Fragment {
                     return getString(R.string.gesture_nothing);
                 case ActionProcessor.ACTION_TURN_SCREEN_OFF:
                     return getString(R.string.gesture_turn_screen_off);
+                case ActionProcessor.ACTION_EXPAND_STATUSBAR:
+                    return getString(R.string.gesture_expand_statusbar);
             }
         }
     }
