@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.PowerManager;
 import android.os.SystemClock;
+import android.view.KeyEvent;
 
 import com.android.internal.util.cm.TorchConstants;
 
@@ -32,6 +33,7 @@ public class ActionProcessor {
     public static final int ACTION_TURN_SCREEN_OFF  = 1;
     public static final int ACTION_EXPAND_STATUSBAR = 2;
     public static final int ACTION_TOGGLE_TORCH     = 3;
+    public static final int ACTION_MUSIC_PLAY_PAUSE = 4;
 
     public static void processAction(final ActionListener actionListener, final int type) {
         switch (type) {
@@ -47,6 +49,9 @@ public class ActionProcessor {
             case ACTION_TOGGLE_TORCH:
                 actionListener.toggleTorch();
                 break;
+            case ACTION_MUSIC_PLAY_PAUSE:
+                actionListener.musicPlayPause();
+                break;
         }
     }
 
@@ -56,6 +61,8 @@ public class ActionProcessor {
         public void collapseStatusBar();
 
         public void toggleTorch();
+
+        public void musicPlayPause();
     }
 
     public static void turnScreenOff(final Context context) {
@@ -71,6 +78,24 @@ public class ActionProcessor {
 
     public static void toggleTorch(final Context context) {
         context.sendBroadcast(new Intent(TorchConstants.ACTION_TOGGLE_STATE));
+    }
+
+    public static void musicPlayPause(final Context context) {
+        sendMediaButtonEvent(context, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE);
+    }
+
+    private static void sendMediaButtonEvent(final Context context, final int code) {
+        final long time = SystemClock.uptimeMillis();
+
+        final Intent downIntent = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
+        final KeyEvent downEvent = new KeyEvent(time, time, KeyEvent.ACTION_DOWN, code, 0);
+        downIntent.putExtra(Intent.EXTRA_KEY_EVENT, downEvent);
+        context.sendOrderedBroadcast(downIntent, null);
+
+        final Intent upIntent = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
+        final KeyEvent upEvent = new KeyEvent(time, time, KeyEvent.ACTION_UP, code, 0);
+        upIntent.putExtra(Intent.EXTRA_KEY_EVENT, upEvent);
+        context.sendOrderedBroadcast(upIntent, null);
     }
 
 }
