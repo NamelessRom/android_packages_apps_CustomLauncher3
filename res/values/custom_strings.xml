@@ -21,6 +21,7 @@
     <string name="gesture_choose">Choose gesture</string>
 
     <string name="gesture_double_tap">Double tap</string>
+    <string name="gesture_long_press">Long press</string>
 
     <string name="gesture_nothing">Nothing</string>
     <string name="gesture_turn_screen_off">Turn screen off</string>

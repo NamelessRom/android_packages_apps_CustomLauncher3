@@ -3341,7 +3341,9 @@ public class Launcher extends Activity
                 if (mWorkspace.isInOverviewMode()) {
                     mWorkspace.startReordering(v);
                 } else {
-                    mWorkspace.enterOverviewMode();
+                    if (!mWorkspace.getGestureListener().onLongPress()) {
+                        mWorkspace.enterOverviewMode();
+                    }
                 }
             } else {
                 if (!(itemUnderLongClick instanceof Folder)) {

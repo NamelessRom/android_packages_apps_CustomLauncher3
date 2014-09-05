@@ -43,9 +43,11 @@ public class GestureFragment extends Fragment {
     public static final String TAG = "GESTURE_FRAGMENT";
 
     public static final String TYPE_DOUBLE_TAP = "type_double_tap";
+    public static final String TYPE_LONG_PRESS = "type_long_press";
 
     private static final Integer[] GESTURES = new Integer[]{
-            R.string.gesture_double_tap
+            R.string.gesture_double_tap,
+            R.string.gesture_long_press
     };
 
     @Override
@@ -187,6 +189,8 @@ public class GestureFragment extends Fragment {
             switch (title) {
                 case R.string.gesture_double_tap:
                     return TYPE_DOUBLE_TAP;
+                case R.string.gesture_long_press:
+                    return TYPE_LONG_PRESS;
                 default:
                     return getString(R.string.gesture_nothing);
             }

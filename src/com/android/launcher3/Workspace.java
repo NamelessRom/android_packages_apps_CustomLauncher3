@@ -300,8 +300,19 @@ public class Workspace extends SmoothPagedView
 
     // Gestures
     private GestureDetector mGestureDetector;
+    private final CustomGestureListener mGestureListener = new CustomGestureListener();
 
-    private class CustomGestureListener extends GestureDetector.SimpleOnGestureListener {
+    public class CustomGestureListener extends GestureDetector.SimpleOnGestureListener {
+
+        public boolean onLongPress() {
+            final int type = SettingsProvider.getIntCustomDefault(getContext(),
+                    GestureFragment.TYPE_LONG_PRESS, ActionProcessor.ACTION_NOTHING);
+            if (ActionProcessor.ACTION_NOTHING == type) {
+                return false;
+            }
+            ActionProcessor.processAction(getContext(), type);
+            return true;
+        }
 
         @Override
         public boolean onDown(final MotionEvent event) {
@@ -315,6 +326,10 @@ public class Workspace extends SmoothPagedView
             ActionProcessor.processAction(getContext(), type);
             return true;
         }
+    }
+
+    public CustomGestureListener getGestureListener() {
+        return mGestureListener;
     }
 
     /**
@@ -388,7 +403,7 @@ public class Workspace extends SmoothPagedView
         setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
 
         // detect gestures
-        mGestureDetector = new GestureDetector(context, new CustomGestureListener());
+        mGestureDetector = new GestureDetector(context, mGestureListener);
     }
 
     @Override
