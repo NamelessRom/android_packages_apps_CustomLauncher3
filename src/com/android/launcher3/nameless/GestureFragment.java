@@ -54,6 +54,8 @@ public class GestureFragment extends Fragment {
             R.string.gesture_swipe_up
     };
 
+    private AlertDialog mDialog;
+
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
             final Bundle savedInstanceState) {
@@ -106,6 +108,15 @@ public class GestureFragment extends Fragment {
             return anim;
         }
         return super.onCreateAnimator(transit, enter, nextAnim);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mDialog != null) {
+            mDialog.dismiss();
+            mDialog = null;
+        }
     }
 
     public void setGestureDone() {
@@ -184,8 +195,12 @@ public class GestureFragment extends Fragment {
                             }
                         });
 
-                final AlertDialog dialog = builder.create();
-                dialog.show();
+                if (mDialog != null) {
+                    mDialog.dismiss();
+                    mDialog = null;
+                }
+                mDialog = builder.create();
+                mDialog.show();
             }
         };
 
