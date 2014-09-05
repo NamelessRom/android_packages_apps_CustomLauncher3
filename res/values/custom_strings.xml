@@ -29,5 +29,6 @@
     <string name="gesture_turn_screen_off">Turn screen off</string>
     <string name="gesture_expand_statusbar">Expand status bar</string>
     <string name="gesture_toggle_torch">Toggle torch</string>
+    <string name="gesture_toggle_silent_mode">Toggle silent mode</string>
     <string name="gesture_music_play_pause">Play/Pause music</string>
 </resources>

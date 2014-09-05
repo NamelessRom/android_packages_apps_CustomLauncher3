@@ -320,6 +320,11 @@ public class Workspace extends SmoothPagedView
                 }
 
                 @Override
+                public void toggleSilentMode() {
+                    ActionProcessor.toggleSilentMode(getContext());
+                }
+
+                @Override
                 public void musicPlayPause() {
                     ActionProcessor.musicPlayPause(getContext());
                 }

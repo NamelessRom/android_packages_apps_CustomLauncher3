@@ -21,19 +21,22 @@ package com.android.launcher3.nameless;
 import android.app.StatusBarManager;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.PowerManager;
 import android.os.SystemClock;
+import android.os.Vibrator;
 import android.view.KeyEvent;
 
 import com.android.internal.util.cm.TorchConstants;
 
 public class ActionProcessor {
 
-    public static final int ACTION_NOTHING          = 0;
-    public static final int ACTION_TURN_SCREEN_OFF  = 1;
-    public static final int ACTION_EXPAND_STATUSBAR = 2;
-    public static final int ACTION_TOGGLE_TORCH     = 3;
-    public static final int ACTION_MUSIC_PLAY_PAUSE = 4;
+    public static final int ACTION_NOTHING            = 0;
+    public static final int ACTION_TURN_SCREEN_OFF    = 1;
+    public static final int ACTION_EXPAND_STATUSBAR   = 2;
+    public static final int ACTION_TOGGLE_TORCH       = 3;
+    public static final int ACTION_TOGGLE_SILENT_MODE = 4;
+    public static final int ACTION_MUSIC_PLAY_PAUSE   = 5;
 
     public static void processAction(final ActionListener actionListener, final int type) {
         switch (type) {
@@ -49,6 +52,9 @@ public class ActionProcessor {
             case ACTION_TOGGLE_TORCH:
                 actionListener.toggleTorch();
                 break;
+            case ACTION_TOGGLE_SILENT_MODE:
+                actionListener.toggleSilentMode();
+                break;
             case ACTION_MUSIC_PLAY_PAUSE:
                 actionListener.musicPlayPause();
                 break;
@@ -61,6 +67,8 @@ public class ActionProcessor {
         public void collapseStatusBar();
 
         public void toggleTorch();
+
+        public void toggleSilentMode();
 
         public void musicPlayPause();
     }
@@ -96,6 +104,19 @@ public class ActionProcessor {
         final KeyEvent upEvent = new KeyEvent(time, time, KeyEvent.ACTION_UP, code, 0);
         upIntent.putExtra(Intent.EXTRA_KEY_EVENT, upEvent);
         context.sendOrderedBroadcast(upIntent, null);
+    }
+
+    public static void toggleSilentMode(final Context context) {
+        final AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        final Vibrator vib = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        final boolean hasVib = vib != null && vib.hasVibrator();
+        if (am.getRingerMode() == AudioManager.RINGER_MODE_NORMAL) {
+            am.setRingerMode(hasVib
+                    ? AudioManager.RINGER_MODE_VIBRATE
+                    : AudioManager.RINGER_MODE_SILENT);
+        } else {
+            am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+        }
     }
 
 }

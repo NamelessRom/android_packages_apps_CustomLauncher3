@@ -230,6 +230,8 @@ public class GestureFragment extends Fragment {
                     return getString(R.string.gesture_expand_statusbar);
                 case ActionProcessor.ACTION_TOGGLE_TORCH:
                     return getString(R.string.gesture_toggle_torch);
+                case ActionProcessor.ACTION_TOGGLE_SILENT_MODE:
+                    return getString(R.string.gesture_toggle_silent_mode);
                 case ActionProcessor.ACTION_MUSIC_PLAY_PAUSE:
                     return getString(R.string.gesture_music_play_pause);
             }
