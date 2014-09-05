@@ -18,7 +18,7 @@
 <resources xmlns:xliff="http://schemas.android.com/apk/res/android">
     <string name="gesture_settings">Gestures</string>
 
-    <string name="gesture_choose">Choose gesture</string>
+    <string name="gesture_choose">Choose action</string>
 
     <string name="gesture_double_tap">Double tap</string>
     <string name="gesture_long_press">Long press</string>
