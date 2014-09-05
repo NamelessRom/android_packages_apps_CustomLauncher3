@@ -28,4 +28,5 @@
     <string name="gesture_nothing">Nothing</string>
     <string name="gesture_turn_screen_off">Turn screen off</string>
     <string name="gesture_expand_statusbar">Expand status bar</string>
+    <string name="gesture_toggle_torch">Toggle torch</string>
 </resources>

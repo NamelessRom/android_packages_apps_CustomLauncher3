@@ -20,5 +20,6 @@
         <item>@string/gesture_nothing</item>
         <item>@string/gesture_turn_screen_off</item>
         <item>@string/gesture_expand_statusbar</item>
+        <item>@string/gesture_toggle_torch</item>
     </string-array>
 </resources>

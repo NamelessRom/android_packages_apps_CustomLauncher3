@@ -20,14 +20,18 @@ package com.android.launcher3.nameless;
 
 import android.app.StatusBarManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.PowerManager;
 import android.os.SystemClock;
+
+import com.android.internal.util.cm.TorchConstants;
 
 public class ActionProcessor {
 
     public static final int ACTION_NOTHING          = 0;
     public static final int ACTION_TURN_SCREEN_OFF  = 1;
     public static final int ACTION_EXPAND_STATUSBAR = 2;
+    public static final int ACTION_TOGGLE_TORCH     = 3;
 
     public static void processAction(final ActionListener actionListener, final int type) {
         switch (type) {
@@ -40,6 +44,9 @@ public class ActionProcessor {
             case ACTION_EXPAND_STATUSBAR:
                 actionListener.collapseStatusBar();
                 break;
+            case ACTION_TOGGLE_TORCH:
+                actionListener.toggleTorch();
+                break;
         }
     }
 
@@ -47,6 +54,8 @@ public class ActionProcessor {
         public void turnScreenOff();
 
         public void collapseStatusBar();
+
+        public void toggleTorch();
     }
 
     public static void turnScreenOff(final Context context) {
@@ -58,6 +67,10 @@ public class ActionProcessor {
         final StatusBarManager sb = (StatusBarManager) context
                 .getSystemService(Context.STATUS_BAR_SERVICE);
         sb.expandNotificationsPanel();
+    }
+
+    public static void toggleTorch(final Context context) {
+        context.sendBroadcast(new Intent(TorchConstants.ACTION_TOGGLE_STATE));
     }
 
 }

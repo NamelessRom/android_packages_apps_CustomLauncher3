@@ -314,6 +314,11 @@ public class Workspace extends SmoothPagedView
                     ActionProcessor.collapseStatusBar(getContext());
                 }
 
+                @Override
+                public void toggleTorch() {
+                    ActionProcessor.toggleTorch(getContext());
+                }
+
             };
 
     public class CustomGestureListener extends GestureDetector.SimpleOnGestureListener {
