@@ -302,6 +302,20 @@ public class Workspace extends SmoothPagedView
     private GestureDetector mGestureDetector;
     private final CustomGestureListener mGestureListener = new CustomGestureListener();
 
+    private final ActionProcessor.ActionListener mActionListener =
+            new ActionProcessor.ActionListener() {
+                @Override
+                public void turnScreenOff() {
+                    ActionProcessor.turnScreenOff(getContext());
+                }
+
+                @Override
+                public void collapseStatusBar() {
+                    ActionProcessor.collapseStatusBar(getContext());
+                }
+
+            };
+
     public class CustomGestureListener extends GestureDetector.SimpleOnGestureListener {
 
         private static final int SWIPE_MIN_DISTANCE = 120;
@@ -314,7 +328,7 @@ public class Workspace extends SmoothPagedView
             if (ActionProcessor.ACTION_NOTHING == type) {
                 return false;
             }
-            ActionProcessor.processAction(getContext(), type);
+            ActionProcessor.processAction(mActionListener, type);
             return true;
         }
 
@@ -327,7 +341,7 @@ public class Workspace extends SmoothPagedView
         public boolean onDoubleTap(final MotionEvent e) {
             final int type = SettingsProvider.getIntCustomDefault(getContext(),
                     GestureFragment.TYPE_DOUBLE_TAP, ActionProcessor.ACTION_NOTHING);
-            ActionProcessor.processAction(getContext(), type);
+            ActionProcessor.processAction(mActionListener, type);
             return true;
         }
 
@@ -342,14 +356,14 @@ public class Workspace extends SmoothPagedView
                         && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
                     final int type = SettingsProvider.getIntCustomDefault(getContext(),
                             GestureFragment.TYPE_SWIPE_UP, ActionProcessor.ACTION_NOTHING);
-                    ActionProcessor.processAction(getContext(), type);
+                    ActionProcessor.processAction(mActionListener, type);
                 }
                 // top to bottom swipe
                 else if (e2.getY() - e1.getY() > SWIPE_MIN_DISTANCE
                         && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
                     final int type = SettingsProvider.getIntCustomDefault(getContext(),
                             GestureFragment.TYPE_SWIPE_DOWN, ActionProcessor.ACTION_NOTHING);
-                    ActionProcessor.processAction(getContext(), type);
+                    ActionProcessor.processAction(mActionListener, type);
                 }
             } catch (Exception e) {
                 return false;

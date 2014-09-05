@@ -29,18 +29,24 @@ public class ActionProcessor {
     public static final int ACTION_TURN_SCREEN_OFF  = 1;
     public static final int ACTION_EXPAND_STATUSBAR = 2;
 
-    public static void processAction(final Context context, final int type) {
+    public static void processAction(final ActionListener actionListener, final int type) {
         switch (type) {
             default:
             case ACTION_NOTHING:
                 return;
             case ACTION_TURN_SCREEN_OFF:
-                turnScreenOff(context);
+                actionListener.turnScreenOff();
                 break;
             case ACTION_EXPAND_STATUSBAR:
-                collapseStatusBar(context);
+                actionListener.collapseStatusBar();
                 break;
         }
+    }
+
+    public interface ActionListener {
+        public void turnScreenOff();
+
+        public void collapseStatusBar();
     }
 
     public static void turnScreenOff(final Context context) {
