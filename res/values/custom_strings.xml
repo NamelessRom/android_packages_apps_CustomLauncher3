@@ -22,6 +22,8 @@
 
     <string name="gesture_double_tap">Double tap</string>
     <string name="gesture_long_press">Long press</string>
+    <string name="gesture_swipe_down">Swipe down</string>
+    <string name="gesture_swipe_up">Swipe up</string>
 
     <string name="gesture_nothing">Nothing</string>
     <string name="gesture_turn_screen_off">Turn screen off</string>

@@ -304,6 +304,10 @@ public class Workspace extends SmoothPagedView
 
     public class CustomGestureListener extends GestureDetector.SimpleOnGestureListener {
 
+        private static final int SWIPE_MIN_DISTANCE = 120;
+        private static final int SWIPE_MAX_OFF_PATH = 250;
+        private static final int SWIPE_THRESHOLD_VELOCITY = 200;
+
         public boolean onLongPress() {
             final int type = SettingsProvider.getIntCustomDefault(getContext(),
                     GestureFragment.TYPE_LONG_PRESS, ActionProcessor.ACTION_NOTHING);
@@ -326,6 +330,33 @@ public class Workspace extends SmoothPagedView
             ActionProcessor.processAction(getContext(), type);
             return true;
         }
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            try {
+                if (Math.abs(e1.getX() - e2.getX()) > SWIPE_MAX_OFF_PATH){
+                    return false;
+                }
+                // bottom to top swipe
+                if (e1.getY() - e2.getY() > SWIPE_MIN_DISTANCE
+                        && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
+                    final int type = SettingsProvider.getIntCustomDefault(getContext(),
+                            GestureFragment.TYPE_SWIPE_UP, ActionProcessor.ACTION_NOTHING);
+                    ActionProcessor.processAction(getContext(), type);
+                }
+                // top to bottom swipe
+                else if (e2.getY() - e1.getY() > SWIPE_MIN_DISTANCE
+                        && Math.abs(velocityY) > SWIPE_THRESHOLD_VELOCITY) {
+                    final int type = SettingsProvider.getIntCustomDefault(getContext(),
+                            GestureFragment.TYPE_SWIPE_DOWN, ActionProcessor.ACTION_NOTHING);
+                    ActionProcessor.processAction(getContext(), type);
+                }
+            } catch (Exception e) {
+                return false;
+            }
+            return true;
+        }
+
     }
 
     public CustomGestureListener getGestureListener() {
