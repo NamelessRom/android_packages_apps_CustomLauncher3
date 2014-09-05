@@ -37,6 +37,8 @@ public class ActionProcessor {
     public static final int ACTION_TOGGLE_TORCH       = 3;
     public static final int ACTION_TOGGLE_SILENT_MODE = 4;
     public static final int ACTION_MUSIC_PLAY_PAUSE   = 5;
+    public static final int ACTION_MUSIC_PREVIOUS     = 6;
+    public static final int ACTION_MUSIC_NEXT         = 7;
 
     public static void processAction(final ActionListener actionListener, final int type) {
         switch (type) {
@@ -58,6 +60,12 @@ public class ActionProcessor {
             case ACTION_MUSIC_PLAY_PAUSE:
                 actionListener.musicPlayPause();
                 break;
+            case ACTION_MUSIC_PREVIOUS:
+                actionListener.musicPrevious();
+                break;
+            case ACTION_MUSIC_NEXT:
+                actionListener.musicNext();
+                break;
         }
     }
 
@@ -71,6 +79,10 @@ public class ActionProcessor {
         public void toggleSilentMode();
 
         public void musicPlayPause();
+
+        public void musicPrevious();
+
+        public void musicNext();
     }
 
     public static void turnScreenOff(final Context context) {
@@ -90,6 +102,14 @@ public class ActionProcessor {
 
     public static void musicPlayPause(final Context context) {
         sendMediaButtonEvent(context, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE);
+    }
+
+    public static void musicPrevious(final Context context) {
+        sendMediaButtonEvent(context, KeyEvent.KEYCODE_MEDIA_PREVIOUS);
+    }
+
+    public static void musicNext(final Context context) {
+        sendMediaButtonEvent(context, KeyEvent.KEYCODE_MEDIA_NEXT);
     }
 
     private static void sendMediaButtonEvent(final Context context, final int code) {

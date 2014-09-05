@@ -234,6 +234,10 @@ public class GestureFragment extends Fragment {
                     return getString(R.string.gesture_toggle_silent_mode);
                 case ActionProcessor.ACTION_MUSIC_PLAY_PAUSE:
                     return getString(R.string.gesture_music_play_pause);
+                case ActionProcessor.ACTION_MUSIC_PREVIOUS:
+                    return getString(R.string.gesture_music_previous);
+                case ActionProcessor.ACTION_MUSIC_NEXT:
+                    return getString(R.string.gesture_music_next);
             }
         }
     }

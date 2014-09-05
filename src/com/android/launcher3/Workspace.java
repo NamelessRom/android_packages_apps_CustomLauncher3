@@ -329,6 +329,16 @@ public class Workspace extends SmoothPagedView
                     ActionProcessor.musicPlayPause(getContext());
                 }
 
+                @Override
+                public void musicPrevious() {
+                    ActionProcessor.musicPrevious(getContext());
+                }
+
+                @Override
+                public void musicNext() {
+                    ActionProcessor.musicNext(getContext());
+                }
+
             };
 
     public class CustomGestureListener extends GestureDetector.SimpleOnGestureListener {

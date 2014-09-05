@@ -31,4 +31,6 @@
     <string name="gesture_toggle_torch">Toggle torch</string>
     <string name="gesture_toggle_silent_mode">Toggle silent mode</string>
     <string name="gesture_music_play_pause">Play/Pause music</string>
+    <string name="gesture_music_previous">Previous song</string>
+    <string name="gesture_music_next">Next song</string>
 </resources>

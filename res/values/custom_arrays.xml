@@ -23,5 +23,7 @@
         <item>@string/gesture_toggle_torch</item>
         <item>@string/gesture_toggle_silent_mode</item>
         <item>@string/gesture_music_play_pause</item>
+        <item>@string/gesture_music_previous</item>
+        <item>@string/gesture_music_next</item>
     </string-array>
 </resources>
