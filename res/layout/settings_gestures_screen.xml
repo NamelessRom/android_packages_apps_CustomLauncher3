@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:adjustViewBounds="true"
-            android:src="@drawable/handle_left" />
+            android:src="@drawable/action_navigation_previous_light" />
 
         <TextView
             android:layout_width="wrap_content"
