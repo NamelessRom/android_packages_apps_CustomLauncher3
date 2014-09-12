@@ -29,7 +29,7 @@ import java.util.ArrayList;
  */
 public abstract class CompositeCursorAdapter extends BaseAdapter {
 
-    private static final int INITIAL_CAPACITY = 2;
+    private static final int INITIAL_CAPACITY = 4;
 
     public static class Partition {
         boolean showIfEmpty;

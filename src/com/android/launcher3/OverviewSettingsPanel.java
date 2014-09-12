@@ -20,15 +20,15 @@ public class OverviewSettingsPanel {
             "com.android.settings.applications.ProtectedAppsActivity";
     public static final String THEME_SETTINGS =
             "com.android.settings.Settings$ThemeSettingsActivity";
-    public static final int HOME_SETTINGS_POSITION = 0;
-    public static final int DRAWER_SETTINGS_POSITION = 1;
-    public static final int APP_SETTINGS_POSITION = 2;
+    public static final int GLOBAL_SETTINGS_POSITION = 0;
+    public static final int HOME_SETTINGS_POSITION = 1;
+    public static final int DRAWER_SETTINGS_POSITION = 2;
+    public static final int APP_SETTINGS_POSITION = 3;
 
     private Launcher mLauncher;
     private View mOverviewPanel;
     private SettingsPinnedHeaderAdapter mSettingsAdapter;
     private PinnedHeaderListView mListView;
-    private String[] mValues;
 
     OverviewSettingsPanel(Launcher launcher, View overviewPanel) {
         mLauncher = launcher;
@@ -42,24 +42,32 @@ public class OverviewSettingsPanel {
                 .findViewById(R.id.settings_home_screen_listview);
         mListView.setOverScrollMode(ListView.OVER_SCROLL_NEVER);
         Resources res = mLauncher.getResources();
+
         String[] headers = new String[] {
+                res.getString(R.string.global_settings),
                 res.getString(R.string.home_screen_settings),
                 res.getString(R.string.drawer_settings),
                 res.getString(R.string.app_settings)};
 
-        mValues = new String[]{
+        String[] valuesGlobal = new String[] {
+                res.getString(R.string.screen_orientation)
+        };
+
+        String[] valuesHome = new String[] {
                 res.getString(R.string.home_screen_search_text),
                 res.getString(R.string.search_screen_left_text),
                 res.getString(R.string.scroll_effect_text),
                 res.getString(R.string.icon_labels),
                 res.getString(R.string.scrolling_wallpaper),
                 res.getString(R.string.grid_size_text),
-                res.getString(R.string.gesture_settings)};
+                res.getString(R.string.gesture_settings)
+        };
 
         String[] valuesDrawer = new String[] {
                 res.getString(R.string.scroll_effect_text),
                 res.getString(R.string.drawer_sorting_text),
-                res.getString(R.string.icon_labels)};
+                res.getString(R.string.icon_labels)
+        };
 
         List<String> valuesAppList = new ArrayList<String>();
         valuesAppList.add(res.getString(R.string.larger_icons_text));
@@ -75,12 +83,15 @@ public class OverviewSettingsPanel {
         mSettingsAdapter.addPartition(false, true);
         mSettingsAdapter.addPartition(false, true);
         mSettingsAdapter.addPartition(false, true);
+        mSettingsAdapter.addPartition(false, true);
         mSettingsAdapter.mPinnedHeaderCount = headers.length;
 
-        mSettingsAdapter.changeCursor(HOME_SETTINGS_POSITION, createCursor(headers[0], mValues));
-        mSettingsAdapter.changeCursor(DRAWER_SETTINGS_POSITION, createCursor(headers[1],
+        mSettingsAdapter.changeCursor(GLOBAL_SETTINGS_POSITION, createCursor(headers[0],
+                valuesGlobal));
+        mSettingsAdapter.changeCursor(HOME_SETTINGS_POSITION, createCursor(headers[1], valuesHome));
+        mSettingsAdapter.changeCursor(DRAWER_SETTINGS_POSITION, createCursor(headers[2],
                 valuesDrawer));
-        mSettingsAdapter.changeCursor(APP_SETTINGS_POSITION, createCursor(headers[2], valuesApp));
+        mSettingsAdapter.changeCursor(APP_SETTINGS_POSITION, createCursor(headers[3], valuesApp));
         mListView.setAdapter(mSettingsAdapter);
     }
 
@@ -179,14 +190,6 @@ public class OverviewSettingsPanel {
 
         defaultHomePanel.setVisibility((pagedView.getPageCount() > 1) ?
                 View.VISIBLE : View.GONE);
-
-        if (mLauncher.isAllAppsVisible()) {
-            mSettingsAdapter.changeCursor(0, createCursor(res
-                    .getString(R.string.home_screen_settings), new String[]{}));
-        } else {
-            mSettingsAdapter.changeCursor(0, createCursor(res
-                    .getString(R.string.home_screen_settings), mValues));
-        }
 
         // Make sure overview panel is drawn above apps customize and collapsed
         mOverviewPanel.bringToFront();
