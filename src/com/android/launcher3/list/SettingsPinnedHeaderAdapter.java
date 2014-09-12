@@ -94,6 +94,12 @@ public class SettingsPinnedHeaderAdapter extends PinnedHeaderListAdapter {
         String state = "";
 
         switch (partition) {
+            case OverviewSettingsPanel.GLOBAL_SETTINGS_POSITION:
+                switch (position) {
+                    case 0:
+                        updateScreenOrientationItem(v);
+                }
+                break;
             case OverviewSettingsPanel.HOME_SETTINGS_POSITION:
                 switch (position) {
                     case 0:
@@ -183,6 +189,32 @@ public class SettingsPinnedHeaderAdapter extends PinnedHeaderListAdapter {
         return mPinnedHeaderCount;
     }
 
+    public void updateScreenOrientationItem(final View v) {
+        final int resId;
+        final int orientation = SettingsProvider.getIntCustomDefault(mLauncher,
+                SettingsProvider.SETTINGS_UI_GLOBAL_ORIENTATION, 0);
+        switch (orientation) {
+            default:
+            case 0:
+                resId = R.string.automatic;
+                break;
+            case 1:
+                resId = R.string.portrait;
+                break;
+            case 2:
+                resId = R.string.portrait_reverse;
+                break;
+            case 3:
+                resId = R.string.landscape;
+                break;
+            case 4:
+                resId = R.string.landscape_reverse;
+                break;
+        }
+        ((TextView) v.findViewById(R.id.item_state))
+                .setText(mLauncher.getResources().getString(resId));
+    }
+
     public void updateDrawerSortSettingsItem(View v) {
         String state = "";
         switch (mLauncher.getAppsCustomizeContentSortMode()) {
@@ -255,6 +287,13 @@ public class SettingsPinnedHeaderAdapter extends PinnedHeaderListAdapter {
             int position = ((SettingsPosition) v.getTag()).position;
 
             switch (partition) {
+                case OverviewSettingsPanel.GLOBAL_SETTINGS_POSITION:
+                    switch (position) {
+                        case 0: // screen orientation
+                            onClickScreenOrientationButton();
+                            break;
+                    }
+                    break;
                 case OverviewSettingsPanel.HOME_SETTINGS_POSITION:
                     switch (position) {
                         case 0:
@@ -369,6 +408,30 @@ public class SettingsPinnedHeaderAdapter extends PinnedHeaderListAdapter {
                 AppsCustomizePagedView.SortMode.getModeForValue(sort));
 
         SettingsProvider.putInt(mLauncher, SettingsProvider.SETTINGS_UI_DRAWER_SORT_MODE, sort);
+
+        notifyDataSetChanged();
+    }
+
+    private void onClickScreenOrientationButton() {
+        int orientation = SettingsProvider.getIntCustomDefault(mLauncher,
+                SettingsProvider.SETTINGS_UI_GLOBAL_ORIENTATION, 0);
+
+        // 0 - automatic
+        // 1 - portrait
+        // 2 - reverse portrait
+        // 3 - landscape
+        // 4 - reverse landscape
+        if (orientation == 4) {
+            orientation = 0;
+        } else {
+            orientation = (orientation + 1);
+        }
+
+        SettingsProvider.putInt(mLauncher, SettingsProvider.SETTINGS_UI_GLOBAL_ORIENTATION,
+                orientation);
+
+        mLauncher.loadOrientation();
+        mLauncher.unlockScreenOrientation(false, 750);
 
         notifyDataSetChanged();
     }

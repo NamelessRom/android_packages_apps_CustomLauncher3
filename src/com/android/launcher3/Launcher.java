@@ -388,6 +388,8 @@ public class Launcher extends Activity
 
     private BubbleTextView mWaitingForResume;
 
+    private int mOrientation;
+
     // Preferences
     private boolean mHideIconLabels;
 
@@ -539,7 +541,10 @@ public class Launcher extends Activity
 
         updateGlobalIcons();
 
-        // On large interfaces, we want the screen to auto-rotate based on the current orientation
+        // initialize the orientation
+        loadOrientation();
+
+        // set orientation depending on user configuration
         unlockScreenOrientation(true);
 
         if (shouldShowIntroScreen()) {
@@ -1636,8 +1641,7 @@ public class Launcher extends Activity
         }
 
         mOverviewPanel = (ViewGroup) findViewById(R.id.overview_panel);
-        mOverviewSettingsPanel = new OverviewSettingsPanel(
-                this, mOverviewPanel);
+        mOverviewSettingsPanel = new OverviewSettingsPanel(this, mOverviewPanel);
         mOverviewSettingsPanel.initializeAdapter();
         mOverviewSettingsPanel.initializeViews();
         mDarkPanel = ((SlidingUpPanelLayout) mOverviewPanel).findViewById(R.id.dark_panel);
@@ -5244,8 +5248,8 @@ public class Launcher extends Activity
     }
 
     public boolean isRotationEnabled() {
-        boolean enableRotation = sForceEnableRotation ||
-                getResources().getBoolean(R.bool.allow_rotation);
+        boolean enableRotation = SettingsProvider.getIntCustomDefault(this,
+                SettingsProvider.SETTINGS_UI_GLOBAL_ORIENTATION, 0) == 0;
         return enableRotation;
     }
     public void lockScreenOrientation() {
@@ -5254,17 +5258,48 @@ public class Launcher extends Activity
                     .getConfiguration().orientation));
         }
     }
+
     public void unlockScreenOrientation(boolean immediate) {
-        if (isRotationEnabled()) {
-            if (immediate) {
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-            } else {
-                mHandler.postDelayed(new Runnable() {
-                    public void run() {
-                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-                    }
-                }, mRestoreScreenOrientationDelay);
-            }
+        unlockScreenOrientation(immediate, mRestoreScreenOrientationDelay);
+    }
+
+    public void unlockScreenOrientation(final boolean immediate, final int delay) {
+        mHandler.removeCallbacks(mSetScreenOrientationRunnable);
+        if (immediate) {
+            setRequestedOrientation(mOrientation);
+        } else {
+            mHandler.postDelayed(mSetScreenOrientationRunnable, delay);
+        }
+    }
+
+    private final Runnable mSetScreenOrientationRunnable = new Runnable() {
+        public void run() {
+            setRequestedOrientation(mOrientation);
+        }
+    };
+
+    public void loadOrientation() {
+        // get the orientation from the user configuration
+        final int orientationSetting = SettingsProvider.getIntCustomDefault(this,
+                SettingsProvider.SETTINGS_UI_GLOBAL_ORIENTATION, 0);
+
+        switch (orientationSetting) {
+            default:
+            case 0:
+                mOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED;
+                break;
+            case 1:
+                mOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+                break;
+            case 2:
+                mOrientation = ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
+                break;
+            case 3:
+                mOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+                break;
+            case 4:
+                mOrientation = ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE;
+                break;
         }
     }
 
@@ -5306,21 +5341,27 @@ public class Launcher extends Activity
     protected String getFirstRunClingSearchBarHint() {
         return "";
     }
+
     protected String getFirstRunCustomContentHint() {
         return "";
     }
+
     protected int getFirstRunFocusedHotseatAppDrawableId() {
         return -1;
     }
+
     protected ComponentName getFirstRunFocusedHotseatAppComponentName() {
         return null;
     }
+
     protected int getFirstRunFocusedHotseatAppRank() {
         return -1;
     }
+
     protected String getFirstRunFocusedHotseatAppBubbleTitle() {
         return "";
     }
+
     protected String getFirstRunFocusedHotseatAppBubbleDescription() {
         return "";
     }
@@ -5555,7 +5596,7 @@ public class Launcher extends Activity
             sDateStamp.setTime(System.currentTimeMillis());
             synchronized (sDumpLogs) {
                 sDumpLogs.add(sDateFormat.format(sDateStamp) + ": " + tag + ", " + log
-                    + (e == null ? "" : (", Exception: " + e)));
+                        + (e == null ? "" : (", Exception: " + e)));
             }
         }
     }
@@ -5563,7 +5604,7 @@ public class Launcher extends Activity
     public void dumpLogsToLocalData() {
         if (DEBUG_DUMP_LOG) {
             new AsyncTask<Void, Void, Void>() {
-                public Void doInBackground(Void ... args) {
+                public Void doInBackground(Void... args) {
                     boolean success = false;
                     sDateStamp.setTime(sRunStart);
                     String FILENAME = sDateStamp.getMonth() + "-"
@@ -5607,7 +5648,7 @@ public class Launcher extends Activity
         }
     }
 
-    public AppsCustomizePagedView.SortMode getAppsCustomizeContentSortMode () {
+    public AppsCustomizePagedView.SortMode getAppsCustomizeContentSortMode() {
         return mAppsCustomizeContent.getSortMode();
     }
 
@@ -5669,13 +5710,17 @@ public class Launcher extends Activity
 
 interface LauncherTransitionable {
     View getContent();
+
     void onLauncherTransitionPrepare(Launcher l, boolean animated, boolean toWorkspace);
+
     void onLauncherTransitionStart(Launcher l, boolean animated, boolean toWorkspace);
+
     void onLauncherTransitionStep(Launcher l, float t);
+
     void onLauncherTransitionEnd(Launcher l, boolean animated, boolean toWorkspace);
 }
 
 interface DebugIntents {
-    static final String DELETE_DATABASE = "com.android.launcher3.action.DELETE_DATABASE";
+    static final String DELETE_DATABASE  = "com.android.launcher3.action.DELETE_DATABASE";
     static final String MIGRATE_DATABASE = "com.android.launcher3.action.MIGRATE_DATABASE";
 }

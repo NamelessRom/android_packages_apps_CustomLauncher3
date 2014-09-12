@@ -37,4 +37,13 @@
     <string name="gesture_music_play_pause">Play/Pause music</string>
     <string name="gesture_music_previous">Previous song</string>
     <string name="gesture_music_next">Next song</string>
+
+    <string name="global_settings">GLOBAL SETTINGS</string>
+
+    <string name="screen_orientation">Screen orientation</string>
+    <string name="automatic">Automatic</string>
+    <string name="portrait">Portrait</string>
+    <string name="portrait_reverse">Portrait reversed</string>
+    <string name="landscape">Landscape</string>
+    <string name="landscape_reverse">Landscape reversed</string>
 </resources>

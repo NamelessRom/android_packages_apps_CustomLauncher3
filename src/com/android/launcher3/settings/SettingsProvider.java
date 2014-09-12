@@ -44,6 +44,8 @@ public final class SettingsProvider {
     public static final String SETTINGS_UI_GENERAL_ICONS_TEXT_FONT_STYLE = "ui_general_icons_text_font_style";
     public static final String SETTINGS_UI_DRAWER_SORT_MODE = "ui_drawer_sort_mode";
 
+    public static final String SETTINGS_UI_GLOBAL_ORIENTATION = "ui_global_orientation";
+
     public static SharedPreferences get(Context context) {
         return context.getSharedPreferences(SETTINGS_KEY, Context.MODE_MULTI_PROCESS);
     }
