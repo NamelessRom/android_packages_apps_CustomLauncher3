@@ -719,7 +719,9 @@ public class Launcher extends Activity
      * @return true if this device is running CM.
      */
     protected boolean isCM() {
-        return getPackageManager().hasSystemFeature("com.cyanogenmod.android");
+        // isCM() returns true on nameless? sweet
+        return true;
+        //return getPackageManager().hasSystemFeature("com.cyanogenmod.android");
     }
 
     /**
