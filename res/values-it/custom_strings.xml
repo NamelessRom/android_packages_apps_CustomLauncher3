@@ -18,4 +18,24 @@
 -->
 <resources xmlns:xliff="http://schemas.android.com/apk/res/android">
   <string name="gesture_settings">Gesti</string>
+  <string name="gesture_choose">Scegli l\'azione</string>
+  <string name="gesture_double_tap">Doppio tocco</string>
+  <string name="gesture_long_press">Pressione prolungata</string>
+  <string name="gesture_swipe_down">Scorrere verso il basso</string>
+  <string name="gesture_swipe_up">Scorrere verso l\'alto</string>
+  <string name="gesture_nothing">Niente</string>
+  <string name="gesture_turn_screen_off">Spegni schermo</string>
+  <string name="gesture_expand_statusbar">Espandi la barra di stato</string>
+  <string name="gesture_toggle_torch">Accendi/Spegni Torcia</string>
+  <string name="gesture_toggle_silent_mode">Attiva/Disattiva Modalità Silenziosa</string>
+  <string name="gesture_music_play_pause">Play/Pausa Musica</string>
+  <string name="gesture_music_previous">Brano precedente</string>
+  <string name="gesture_music_next">Brano successivo</string>
+  <string name="global_settings">IMPOSTAZIONI GLOBALI</string>
+  <string name="screen_orientation">Orientamento dello schermo</string>
+  <string name="automatic">Automatico</string>
+  <string name="portrait">Verticale</string>
+  <string name="portrait_reverse">Verticale invertito</string>
+  <string name="landscape">Orizzontale</string>
+  <string name="landscape_reverse">Orizzontale invertito</string>
 </resources>

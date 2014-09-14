@@ -31,4 +31,11 @@
   <string name="gesture_music_play_pause">Medien: Play/Pause</string>
   <string name="gesture_music_previous">Medien: Vorheriger Titel</string>
   <string name="gesture_music_next">Medien: Nächster Titel</string>
+  <string name="global_settings">GLOBALE EINSTELLUNGEN</string>
+  <string name="screen_orientation">Bildschirmausrichtung</string>
+  <string name="automatic">Automatisch</string>
+  <string name="portrait">Hochformat</string>
+  <string name="portrait_reverse">Hochformat (umgekehrt)</string>
+  <string name="landscape">Querformat</string>
+  <string name="landscape_reverse">Querformat (umgekehrt)</string>
 </resources>

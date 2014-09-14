@@ -18,4 +18,24 @@
 -->
 <resources xmlns:xliff="http://schemas.android.com/apk/res/android">
   <string name="gesture_settings">Gesturi</string>
+  <string name="gesture_choose">Alege acțiunea</string>
+  <string name="gesture_double_tap">Atingere dubla</string>
+  <string name="gesture_long_press">Atingere lunga</string>
+  <string name="gesture_swipe_down">Glisați în jos</string>
+  <string name="gesture_swipe_up">Glisați în sus</string>
+  <string name="gesture_nothing">Nimic</string>
+  <string name="gesture_turn_screen_off">Oprire ecran</string>
+  <string name="gesture_expand_statusbar">Extindeţi bara de stare</string>
+  <string name="gesture_toggle_torch">Comutare lanternă</string>
+  <string name="gesture_toggle_silent_mode">Comutare mod silenţios</string>
+  <string name="gesture_music_play_pause">Redare/Pauză muzică</string>
+  <string name="gesture_music_previous">Melodia anterioară</string>
+  <string name="gesture_music_next">Melodia următoare</string>
+  <string name="global_settings">SETĂRI GLOBALE</string>
+  <string name="screen_orientation">Orientare ecran</string>
+  <string name="automatic">Automat</string>
+  <string name="portrait">Portret</string>
+  <string name="portrait_reverse">Portret inversat</string>
+  <string name="landscape">Peisaj</string>
+  <string name="landscape_reverse">Peisaj inversat</string>
 </resources>
