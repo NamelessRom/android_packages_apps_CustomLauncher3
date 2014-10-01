@@ -1103,7 +1103,7 @@ public class Workspace extends SmoothPagedView
             if (getScreenWithId(screenId) == null) {
                 Log.e(TAG, "Skipping child, screenId " + screenId + " not found");
                 // DEBUGGING - Print out the stack trace to see where we are adding from
-                new Throwable().printStackTrace();
+                if (Launcher.LOGD) new Throwable().printStackTrace();
                 return;
             }
         }
