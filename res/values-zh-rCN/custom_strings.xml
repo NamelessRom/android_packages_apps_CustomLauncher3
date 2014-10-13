@@ -16,4 +16,26 @@
    *    You should have received a copy of the GNU General Public License
    *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources xmlns:xliff="http://schemas.android.com/apk/res/android"/>
+<resources xmlns:xliff="http://schemas.android.com/apk/res/android">
+  <string name="gesture_settings">手势操作</string>
+  <string name="gesture_choose">选择操作</string>
+  <string name="gesture_double_tap">双击</string>
+  <string name="gesture_long_press">长按</string>
+  <string name="gesture_swipe_down">向下滑动</string>
+  <string name="gesture_swipe_up">向上滑动</string>
+  <string name="gesture_nothing">无</string>
+  <string name="gesture_turn_screen_off">关闭屏幕</string>
+  <string name="gesture_expand_statusbar">打开通知栏</string>
+  <string name="gesture_toggle_torch">开关手电筒</string>
+  <string name="gesture_toggle_silent_mode">切换静音模式</string>
+  <string name="gesture_music_play_pause">播放/暂停音乐</string>
+  <string name="gesture_music_previous">上一首歌曲</string>
+  <string name="gesture_music_next">下一首歌曲</string>
+  <string name="global_settings">全局设置</string>
+  <string name="screen_orientation">屏幕方向​​​​​​​​​​​​​​</string>
+  <string name="automatic">自动</string>
+  <string name="portrait">纵向</string>
+  <string name="portrait_reverse">纵向逆转</string>
+  <string name="landscape">横向</string>
+  <string name="landscape_reverse">横向逆转</string>
+</resources>

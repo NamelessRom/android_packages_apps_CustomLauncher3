@@ -16,4 +16,26 @@
    *    You should have received a copy of the GNU General Public License
    *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources xmlns:xliff="http://schemas.android.com/apk/res/android"/>
+<resources xmlns:xliff="http://schemas.android.com/apk/res/android">
+  <string name="gesture_settings">Жести</string>
+  <string name="gesture_choose">Виберіть дію</string>
+  <string name="gesture_double_tap">Подвійне натискання</string>
+  <string name="gesture_long_press">Довге натискання</string>
+  <string name="gesture_swipe_down">Зсунути вниз</string>
+  <string name="gesture_swipe_up">Зсунути вгору</string>
+  <string name="gesture_nothing">Нічого</string>
+  <string name="gesture_turn_screen_off">Вимкнути екран</string>
+  <string name="gesture_expand_statusbar">Розгорнути рядок стану</string>
+  <string name="gesture_toggle_torch">Ліхтарик</string>
+  <string name="gesture_toggle_silent_mode">Увімкнути беззвучний режим</string>
+  <string name="gesture_music_play_pause">Відтворення/пауза музики</string>
+  <string name="gesture_music_previous">Попередній трек</string>
+  <string name="gesture_music_next">Наступний трек</string>
+  <string name="global_settings">ГЛОБАЛЬНІ ПАРАМЕТРИ</string>
+  <string name="screen_orientation">Орієнтація екрану</string>
+  <string name="automatic">Автоматично</string>
+  <string name="portrait">Портретна</string>
+  <string name="portrait_reverse">Портретна перевернута</string>
+  <string name="landscape">Альбомна</string>
+  <string name="landscape_reverse">Альбомна перевернута</string>
+</resources>
