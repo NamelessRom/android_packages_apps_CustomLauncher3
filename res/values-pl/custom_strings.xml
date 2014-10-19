@@ -31,4 +31,11 @@
   <string name="gesture_music_play_pause">Odtwórz/Zatrzymaj muzykę</string>
   <string name="gesture_music_previous">Poprzedni utwór</string>
   <string name="gesture_music_next">Następny utwór</string>
+  <string name="global_settings">USTAWIENIA GLOBALNE</string>
+  <string name="screen_orientation">Orientacji ekranu</string>
+  <string name="automatic">Automatyczny</string>
+  <string name="portrait">Pionowo</string>
+  <string name="portrait_reverse">Odwrócony w Pionowo</string>
+  <string name="landscape">Poziomo</string>
+  <string name="landscape_reverse">Odwrócony w Poziomie</string>
 </resources>
