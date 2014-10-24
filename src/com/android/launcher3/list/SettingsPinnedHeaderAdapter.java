@@ -116,6 +116,12 @@ public class SettingsPinnedHeaderAdapter extends PinnedHeaderListAdapter {
                         ((TextView) v.findViewById(R.id.item_state)).setText(state);
                         break;
                     case 4:
+                        current = mLauncher.shouldHideStatusBar();
+                        state = current ? res.getString(R.string.hide)
+                                : res.getString(R.string.show);
+                        ((TextView) v.findViewById(R.id.item_state)).setText(state);
+                        break;
+                    case 5:
                         current = SettingsProvider.getBoolean(mContext,
                                 SettingsProvider.SETTINGS_UI_HOMESCREEN_SCROLLING_WALLPAPER_SCROLL,
                                 R.bool.preferences_interface_homescreen_scrolling_wallpaper_scroll_default);
@@ -123,7 +129,7 @@ public class SettingsPinnedHeaderAdapter extends PinnedHeaderListAdapter {
                                 : res.getString(R.string.setting_state_off);
                         ((TextView) v.findViewById(R.id.item_state)).setText(state);
                         break;
-                    case 5:
+                    case 6:
                         updateDynamicGridSizeSettingsItem(v);
                         break;
                     default:
@@ -334,15 +340,20 @@ public class SettingsPinnedHeaderAdapter extends PinnedHeaderListAdapter {
                             mLauncher.setUpdateDynamicGrid();
                             break;
                         case 4:
+                            onStatusBarBooleanChanged(v,
+                                    SettingsProvider.SETTINGS_UI_HOMESCREEN_HIDE_STATUS_BAR);
+                            mLauncher.updateStatusBarVisibility();
+                            break;
+                        case 5:
                             onSettingsBooleanChanged(v,
                                     SettingsProvider.SETTINGS_UI_HOMESCREEN_SCROLLING_WALLPAPER_SCROLL,
                                     R.bool.preferences_interface_homescreen_scrolling_wallpaper_scroll_default);
                             mLauncher.setUpdateDynamicGrid();
                             break;
-                        case 5:
+                        case 6:
                             mLauncher.onClickDynamicGridSizeButton();
                             break;
-                        case 6:
+                        case 7:
                             mLauncher.onClickGestureButton();
                             break;
                     }
@@ -418,6 +429,22 @@ public class SettingsPinnedHeaderAdapter extends PinnedHeaderListAdapter {
         String state = current ? mLauncher.getResources().getString(
                 R.string.icon_labels_show) : mLauncher.getResources().getString(
                 R.string.icon_labels_hide);
+        ((TextView) v.findViewById(R.id.item_state)).setText(state);
+    }
+
+    private void onStatusBarBooleanChanged(View v, String key) {
+        final boolean current = SettingsProvider.getBooleanCustomDefault(mContext, key, false);
+
+        // Set new state
+        final SharedPreferences sharedPref = SettingsProvider.get(mContext);
+        sharedPref.edit().putBoolean(key, !current).commit();
+        sharedPref.edit()
+                .putBoolean(SettingsProvider.SETTINGS_CHANGED, true)
+                .commit();
+
+        final String state = current
+                ? mLauncher.getResources().getString(R.string.show)
+                : mLauncher.getResources().getString(R.string.hide);
         ((TextView) v.findViewById(R.id.item_state)).setText(state);
     }
 
