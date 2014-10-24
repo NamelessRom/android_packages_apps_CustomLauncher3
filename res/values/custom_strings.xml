@@ -46,4 +46,8 @@
     <string name="portrait_reverse">Portrait reversed</string>
     <string name="landscape">Landscape</string>
     <string name="landscape_reverse">Landscape reversed</string>
+
+    <string name="hide_status_bar_title">Hide status bar</string>
+    <string name="hide">Hide</string>
+    <string name="show">Show</string>
 </resources>

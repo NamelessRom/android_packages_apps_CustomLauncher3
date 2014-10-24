@@ -46,7 +46,8 @@ public class OverviewSettingsPanel {
                 res.getString(R.string.app_settings)};
 
         String[] valuesGlobal = new String[] {
-                res.getString(R.string.screen_orientation)
+                res.getString(R.string.screen_orientation),
+                res.getString(R.string.hide_status_bar_title)
         };
 
         String[] valuesHome = new String[] {

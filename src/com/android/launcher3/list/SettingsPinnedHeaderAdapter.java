@@ -98,6 +98,13 @@ public class SettingsPinnedHeaderAdapter extends PinnedHeaderListAdapter {
                 switch (position) {
                     case 0:
                         updateScreenOrientationItem(v);
+                        break;
+                    case 1:
+                        current = mLauncher.shouldHideStatusBar();
+                        state = current ? res.getString(R.string.hide)
+                                : res.getString(R.string.show);
+                        ((TextView) v.findViewById(R.id.item_state)).setText(state);
+                        break;
                 }
                 break;
             case OverviewSettingsPanel.HOME_SETTINGS_POSITION:
@@ -292,6 +299,11 @@ public class SettingsPinnedHeaderAdapter extends PinnedHeaderListAdapter {
                         case 0: // screen orientation
                             onClickScreenOrientationButton();
                             break;
+                        case 1: // show status bar
+                            onStatusBarBooleanChanged(v,
+                            SettingsProvider.SETTINGS_UI_HOMESCREEN_HIDE_STATUS_BAR);
+                            mLauncher.updateStatusBarVisibility();
+                            break;
                     }
                     break;
                 case OverviewSettingsPanel.HOME_SETTINGS_POSITION:
@@ -396,6 +408,22 @@ public class SettingsPinnedHeaderAdapter extends PinnedHeaderListAdapter {
         String state = current ? mLauncher.getResources().getString(
                 R.string.icon_labels_show) : mLauncher.getResources().getString(
                 R.string.icon_labels_hide);
+        ((TextView) v.findViewById(R.id.item_state)).setText(state);
+    }
+
+    private void onStatusBarBooleanChanged(View v, String key) {
+        final boolean current = SettingsProvider.getBooleanCustomDefault(mContext, key, false);
+
+        // Set new state
+        final SharedPreferences sharedPref = SettingsProvider.get(mContext);
+        sharedPref.edit().putBoolean(key, !current).commit();
+        sharedPref.edit()
+                .putBoolean(SettingsProvider.SETTINGS_CHANGED, true)
+                .commit();
+
+        final String state = current
+                ? mLauncher.getResources().getString(R.string.show)
+                : mLauncher.getResources().getString(R.string.hide);
         ((TextView) v.findViewById(R.id.item_state)).setText(state);
     }
 

@@ -1072,6 +1072,7 @@ public class Launcher extends Activity
             Log.v(TAG, "Launcher.onResume()");
         }
         super.onResume();
+        updateStatusBarVisibility();
 
         // Restore the previous launcher state
         if (mOnResumeState == State.WORKSPACE) {
@@ -1206,6 +1207,23 @@ public class Launcher extends Activity
         if (mWorkspace.getCustomContentCallbacks() != null) {
             mWorkspace.getCustomContentCallbacks().onHide();
         }
+    }
+
+    public void updateStatusBarVisibility() {
+        final View decorView = getWindow().getDecorView();
+        if (decorView != null) {
+            if (shouldHideStatusBar()) {
+                decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+            } else {
+                decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+            }
+        }
+    }
+
+    public boolean shouldHideStatusBar() {
+        return SettingsProvider.getBooleanCustomDefault(this,
+                SettingsProvider.SETTINGS_UI_HOMESCREEN_HIDE_STATUS_BAR, false);
     }
 
     QSBScroller mQsbScroller = new QSBScroller() {

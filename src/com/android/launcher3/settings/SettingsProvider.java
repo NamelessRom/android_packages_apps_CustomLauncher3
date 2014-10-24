@@ -27,6 +27,7 @@ public final class SettingsProvider {
     public static final String SETTINGS_UI_HOMESCREEN_DEFAULT_SCREEN_ID = "ui_homescreen_default_screen_id";
     public static final String SETTINGS_UI_HOMESCREEN_SEARCH = "ui_homescreen_search";
     public static final String SETTINGS_UI_HOMESCREEN_HIDE_ICON_LABELS = "ui_homescreen_general_hide_icon_labels";
+    public static final String SETTINGS_UI_HOMESCREEN_HIDE_STATUS_BAR = "ui_homescreen_general_hide_status_bar";
     public static final String SETTINGS_UI_HOMESCREEN_SCROLLING_TRANSITION_EFFECT = "ui_homescreen_scrolling_transition_effect";
     public static final String SETTINGS_UI_HOMESCREEN_SCROLLING_WALLPAPER_SCROLL = "ui_homescreen_scrolling_wallpaper_scroll";
     public static final String SETTINGS_UI_HOMESCREEN_SCROLLING_PAGE_OUTLINES = "ui_homescreen_scrolling_page_outlines";
