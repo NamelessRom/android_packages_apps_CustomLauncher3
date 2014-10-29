@@ -38,4 +38,7 @@
   <string name="portrait_reverse">Hochformat (umgekehrt)</string>
   <string name="landscape">Querformat</string>
   <string name="landscape_reverse">Querformat (umgekehrt)</string>
+  <string name="hide_status_bar_title">Statusleiste verstecken</string>
+  <string name="hide">Ausblenden</string>
+  <string name="show">Zeigen</string>
 </resources>
