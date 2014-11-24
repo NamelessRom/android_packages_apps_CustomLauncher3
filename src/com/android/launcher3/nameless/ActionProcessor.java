@@ -27,7 +27,7 @@ import android.os.SystemClock;
 import android.os.Vibrator;
 import android.view.KeyEvent;
 
-import com.android.internal.util.cm.TorchConstants;
+//import com.android.internal.util.cm.TorchConstants;
 
 public class ActionProcessor {
 
@@ -97,7 +97,7 @@ public class ActionProcessor {
     }
 
     public static void toggleTorch(final Context context) {
-        context.sendBroadcast(new Intent(TorchConstants.ACTION_TOGGLE_STATE));
+//        context.sendBroadcast(new Intent(TorchConstants.ACTION_TOGGLE_STATE));
     }
 
     public static void musicPlayPause(final Context context) {
