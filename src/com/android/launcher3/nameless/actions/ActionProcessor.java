@@ -16,7 +16,7 @@
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * -->
  */
-package com.android.launcher3.nameless;
+package com.android.launcher3.nameless.actions;
 
 import android.app.StatusBarManager;
 import android.content.Context;
@@ -27,18 +27,20 @@ import android.os.SystemClock;
 import android.os.Vibrator;
 import android.view.KeyEvent;
 
+import com.android.launcher3.nameless.actions.BaseActionListener;
+
 public class ActionProcessor {
 
-    public static final int ACTION_NOTHING            = 0;
-    public static final int ACTION_TURN_SCREEN_OFF    = 1;
-    public static final int ACTION_EXPAND_STATUSBAR   = 2;
-    public static final int ACTION_TOGGLE_TORCH       = 3;
+    public static final int ACTION_NOTHING = 0;
+    public static final int ACTION_TURN_SCREEN_OFF = 1;
+    public static final int ACTION_EXPAND_STATUSBAR = 2;
+    public static final int ACTION_TOGGLE_TORCH = 3;
     public static final int ACTION_TOGGLE_SILENT_MODE = 4;
-    public static final int ACTION_MUSIC_PLAY_PAUSE   = 5;
-    public static final int ACTION_MUSIC_PREVIOUS     = 6;
-    public static final int ACTION_MUSIC_NEXT         = 7;
+    public static final int ACTION_MUSIC_PLAY_PAUSE = 5;
+    public static final int ACTION_MUSIC_PREVIOUS = 6;
+    public static final int ACTION_MUSIC_NEXT = 7;
 
-    public static void processAction(final ActionListener actionListener, final int type) {
+    public static void processAction(final BaseActionListener actionListener, final int type) {
         switch (type) {
             default:
             case ACTION_NOTHING:
@@ -65,22 +67,6 @@ public class ActionProcessor {
                 actionListener.musicNext();
                 break;
         }
-    }
-
-    public interface ActionListener {
-        public void turnScreenOff();
-
-        public void collapseStatusBar();
-
-        public void toggleTorch();
-
-        public void toggleSilentMode();
-
-        public void musicPlayPause();
-
-        public void musicPrevious();
-
-        public void musicNext();
     }
 
     public static void turnScreenOff(final Context context) {

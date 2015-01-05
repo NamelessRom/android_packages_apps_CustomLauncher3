@@ -5,7 +5,7 @@
     android:background="@color/settings_bg_color"
     android:orientation="vertical"
     android:paddingTop="@dimen/overview_panel_bottom_padding"
-    android:clickable="true" >
+    android:clickable="true">
 
     <LinearLayout
         android:id="@+id/gesture_title"
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@drawable/listitem_bg"
-        android:clickable="true" >
+        android:clickable="true">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -37,6 +37,7 @@
         android:id="@+id/settings_gestures_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="10dp"
         android:listSelector="@android:color/transparent"
-        android:splitMotionEvents="false"/>
+        android:splitMotionEvents="false" />
 </LinearLayout>

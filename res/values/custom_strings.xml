@@ -23,11 +23,17 @@
     <!-- Gestures -->
     <string name="gesture_settings">Gestures</string>
     <string name="gesture_choose">Choose action</string>
+    <!-- Gesture categories -->
+    <string name="gesture_swipe_down">Swipe down</string>
+    <string name="gesture_swipe_up">Swipe up</string>
+    <string name="gesture_special">Special</string>
+    <!-- Gesture directions -->
+    <string name="left">Left</string>
+    <string name="middle">Middle</string>
+    <string name="right">Right</string>
     <!-- Gesture triggers -->
     <string name="gesture_double_tap">Double tap</string>
     <string name="gesture_long_press">Long press</string>
-    <string name="gesture_swipe_down">Swipe down</string>
-    <string name="gesture_swipe_up">Swipe up</string>
     <!-- Gesture actions -->
     <string name="gesture_nothing">Nothing</string>
     <string name="gesture_turn_screen_off">Turn screen off</string>
