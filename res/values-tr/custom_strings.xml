@@ -24,7 +24,7 @@
   <string name="gesture_swipe_up">Yukarı kaydır</string>
   <string name="gesture_nothing">Hiçbir şey</string>
   <string name="gesture_turn_screen_off">Ekranı Kapat</string>
-  <string name="gesture_expand_statusbar">Durum Çubuğunu Genişlet</string>
+  <string name="gesture_expand_status_bar">Durum Çubuğunu Genişlet</string>
   <string name="gesture_toggle_torch">El fenerini aç/kapat</string>
   <string name="gesture_toggle_silent_mode">Sessiz moduna geç</string>
   <string name="gesture_music_play_pause">Oynat/Duraklat müzik</string>

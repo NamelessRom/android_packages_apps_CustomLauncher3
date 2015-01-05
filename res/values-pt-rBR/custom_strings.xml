@@ -24,7 +24,7 @@
   <string name="gesture_swipe_up">Deslizar para cima</string>
   <string name="gesture_nothing">Nada</string>
   <string name="gesture_turn_screen_off">Desligar a tela</string>
-  <string name="gesture_expand_statusbar">Expandir a barra de status</string>
+  <string name="gesture_expand_status_bar">Expandir a barra de status</string>
   <string name="gesture_toggle_torch">Lig/Desl. lanterna</string>
   <string name="gesture_toggle_silent_mode">Lig/Desl. modo silencioso</string>
   <string name="gesture_music_play_pause">Reproduzir/Pausar música</string>

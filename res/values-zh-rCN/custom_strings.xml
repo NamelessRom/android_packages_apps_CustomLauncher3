@@ -24,7 +24,7 @@
   <string name="gesture_swipe_up">向上滑动</string>
   <string name="gesture_nothing">无</string>
   <string name="gesture_turn_screen_off">关闭屏幕</string>
-  <string name="gesture_expand_statusbar">打开通知栏</string>
+  <string name="gesture_expand_status_bar">打开通知栏</string>
   <string name="gesture_toggle_torch">开关手电筒</string>
   <string name="gesture_toggle_silent_mode">切换静音模式</string>
   <string name="gesture_music_play_pause">播放/暂停音乐</string>

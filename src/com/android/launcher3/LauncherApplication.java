@@ -23,9 +23,13 @@ public class LauncherApplication extends Application {
     public static boolean LAUNCHER_SHORTCUT_ENABLED;
     public static boolean SHOW_CTAPP_FEATURE;
 
+    private static LauncherApplication sInstance;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        sInstance = this;
+
         LAUNCHER_SHOW_UNREAD_NUMBER = getResources().getBoolean(
                 R.bool.config_launcher_show_unread_number);
         LAUNCHER_SHORTCUT_ENABLED = getResources().getBoolean(
@@ -37,7 +41,11 @@ public class LauncherApplication extends Application {
 
     @Override
     public void onTerminate() {
-        super.onTerminate();
         LauncherAppState.getInstance().onTerminate();
+        super.onTerminate();
+    }
+
+    public static String getStr(final int resId) {
+        return sInstance.getString(resId);
     }
 }

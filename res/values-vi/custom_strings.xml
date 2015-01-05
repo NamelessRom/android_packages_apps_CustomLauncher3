@@ -24,7 +24,7 @@
   <string name="gesture_swipe_up">Vuốt lên</string>
   <string name="gesture_nothing">Không gì cả</string>
   <string name="gesture_turn_screen_off">Tắt màn hình</string>
-  <string name="gesture_expand_statusbar">Mở rộng thanh trạng thái</string>
+  <string name="gesture_expand_status_bar">Mở rộng thanh trạng thái</string>
   <string name="gesture_toggle_torch">Bật/tắt đèn pin</string>
   <string name="gesture_toggle_silent_mode">Bật/tắt chế độ im lặng</string>
   <string name="gesture_music_play_pause">Phát/tạm dừng trình nghe nhạc</string>

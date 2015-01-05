@@ -24,7 +24,7 @@
   <string name="gesture_swipe_up">Свайп вверх</string>
   <string name="gesture_nothing">Ничего</string>
   <string name="gesture_turn_screen_off">Выключить экран</string>
-  <string name="gesture_expand_statusbar">Разверните строку состояния</string>
+  <string name="gesture_expand_status_bar">Разверните строку состояния</string>
   <string name="gesture_toggle_torch">Фонарик</string>
   <string name="gesture_toggle_silent_mode">Переключение в тихий режим</string>
   <string name="gesture_music_play_pause">Воспроизведение/пауза музыки</string>

@@ -24,7 +24,7 @@
   <string name="gesture_swipe_up">Nach oben streichen</string>
   <string name="gesture_nothing">Nichts</string>
   <string name="gesture_turn_screen_off">Bildschirm ausschalten</string>
-  <string name="gesture_expand_statusbar">Erweitern der Statusleiste</string>
+  <string name="gesture_expand_status_bar">Erweitern der Statusleiste</string>
   <string name="gesture_toggle_torch">Taschenlampe</string>
   <string name="gesture_toggle_silent_mode">Klingelmodus umschalten</string>
   <string name="gesture_music_play_pause">Medien: Play/Pause</string>

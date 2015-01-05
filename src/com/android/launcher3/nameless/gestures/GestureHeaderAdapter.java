@@ -78,7 +78,7 @@ public class GestureHeaderAdapter extends PinnedHeaderListAdapter {
     @Override
     protected void bindView(View v, int partition, Cursor cursor, int position) {
         final int titleId = cursor.getInt(1);
-        final String type = getType(titleId);
+        final String type = ActionProcessor.getType(titleId);
         final ViewHolder viewHolder = new ViewHolder(type, v);
         final Resources res = mContext.getResources();
 
@@ -88,7 +88,7 @@ public class GestureHeaderAdapter extends PinnedHeaderListAdapter {
         }
 
         viewHolder.title.setText(titleId);
-        viewHolder.state.setText(getGestureById(
+        viewHolder.state.setText(ActionProcessor.getGestureById(
                 SettingsProvider.getIntCustomDefault(mContext, type, 0)));
 
         v.setTag(viewHolder);
@@ -133,7 +133,7 @@ public class GestureHeaderAdapter extends PinnedHeaderListAdapter {
                         @Override public void onClick(DialogInterface dialogInterface, int i) {
                             SettingsProvider.putInt(getContext(), type, i);
                             GestureHelper.get(getContext()).updateActions(getContext());
-                            viewHolder.state.setText(getGestureById(i));
+                            viewHolder.state.setText(ActionProcessor.getGestureById(i));
                             dialogInterface.dismiss();
                         }
                     });
@@ -146,58 +146,5 @@ public class GestureHeaderAdapter extends PinnedHeaderListAdapter {
             mDialog.show();
         }
     };
-
-    private String getString(final int id) {
-        return mContext.getString(id);
-    }
-
-    private String getType(final int title) {
-        switch (title) {
-            // swipe down
-            case R.string.gesture_swipe_down_left:
-                return GestureFragment.TYPE_SWIPE_DOWN_LEFT;
-            case R.string.gesture_swipe_down_middle:
-                return GestureFragment.TYPE_SWIPE_DOWN_MIDDLE;
-            case R.string.gesture_swipe_down_right:
-                return GestureFragment.TYPE_SWIPE_DOWN_RIGHT;
-            // swipe up
-            case R.string.gesture_swipe_up_left:
-                return GestureFragment.TYPE_SWIPE_UP_LEFT;
-            case R.string.gesture_swipe_up_middle:
-                return GestureFragment.TYPE_SWIPE_UP_MIDDLE;
-            case R.string.gesture_swipe_up_right:
-                return GestureFragment.TYPE_SWIPE_UP_RIGHT;
-            // special
-            case R.string.gesture_double_tap:
-                return GestureFragment.TYPE_DOUBLE_TAP;
-            case R.string.gesture_long_press:
-                return GestureFragment.TYPE_LONG_PRESS;
-            // nothing
-            default:
-                return getString(R.string.gesture_nothing);
-        }
-    }
-
-    private String getGestureById(final int gestureId) {
-        switch (gestureId) {
-            default:
-            case ActionProcessor.ACTION_NOTHING:
-                return getString(R.string.gesture_nothing);
-            case ActionProcessor.ACTION_TURN_SCREEN_OFF:
-                return getString(R.string.gesture_turn_screen_off);
-            case ActionProcessor.ACTION_EXPAND_STATUSBAR:
-                return getString(R.string.gesture_expand_statusbar);
-            case ActionProcessor.ACTION_TOGGLE_TORCH:
-                return getString(R.string.gesture_toggle_torch);
-            case ActionProcessor.ACTION_TOGGLE_SILENT_MODE:
-                return getString(R.string.gesture_toggle_silent_mode);
-            case ActionProcessor.ACTION_MUSIC_PLAY_PAUSE:
-                return getString(R.string.gesture_music_play_pause);
-            case ActionProcessor.ACTION_MUSIC_PREVIOUS:
-                return getString(R.string.gesture_music_previous);
-            case ActionProcessor.ACTION_MUSIC_NEXT:
-                return getString(R.string.gesture_music_next);
-        }
-    }
 
 }

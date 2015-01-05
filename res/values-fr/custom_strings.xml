@@ -24,7 +24,7 @@
   <string name="gesture_swipe_up">Glisser en haut</string>
   <string name="gesture_nothing">Aucun</string>
   <string name="gesture_turn_screen_off">Éteindre l\'écran</string>
-  <string name="gesture_expand_statusbar">Étendre la barre d\'état</string>
+  <string name="gesture_expand_status_bar">Étendre la barre d\'état</string>
   <string name="gesture_toggle_torch">Lampe</string>
   <string name="gesture_toggle_silent_mode">Mode silencieux</string>
   <string name="gesture_music_play_pause">Lecture/Pause de la musique</string>

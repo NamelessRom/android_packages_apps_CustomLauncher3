@@ -23,13 +23,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.PowerManager;
+import android.os.RemoteException;
 import android.os.SystemClock;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.KeyEvent;
 
-import com.android.launcher3.nameless.actions.BaseActionListener;
+import com.android.launcher3.LauncherApplication;
+import com.android.launcher3.R;
+import com.android.launcher3.nameless.Utils;
+import com.android.launcher3.nameless.gestures.GestureFragment;
 
 public class ActionProcessor {
+    private static final String TAG = "ActionProcessor";
 
     public static final int ACTION_NOTHING = 0;
     public static final int ACTION_TURN_SCREEN_OFF = 1;
@@ -39,6 +45,7 @@ public class ActionProcessor {
     public static final int ACTION_MUSIC_PLAY_PAUSE = 5;
     public static final int ACTION_MUSIC_PREVIOUS = 6;
     public static final int ACTION_MUSIC_NEXT = 7;
+    public static final int Action_TOGGLE_LAST_APP = 8;
 
     public static void processAction(final BaseActionListener actionListener, final int type) {
         switch (type) {
@@ -49,7 +56,7 @@ public class ActionProcessor {
                 actionListener.turnScreenOff();
                 break;
             case ACTION_EXPAND_STATUSBAR:
-                actionListener.collapseStatusBar();
+                actionListener.expandStatusBar();
                 break;
             case ACTION_TOGGLE_TORCH:
                 actionListener.toggleTorch();
@@ -66,6 +73,60 @@ public class ActionProcessor {
             case ACTION_MUSIC_NEXT:
                 actionListener.musicNext();
                 break;
+            case Action_TOGGLE_LAST_APP:
+                actionListener.toggleLastApp();
+                break;
+        }
+    }
+
+    public static String getType(final int title) {
+        switch (title) {
+            // swipe down
+            case R.string.gesture_swipe_down_left:
+                return GestureFragment.TYPE_SWIPE_DOWN_LEFT;
+            case R.string.gesture_swipe_down_middle:
+                return GestureFragment.TYPE_SWIPE_DOWN_MIDDLE;
+            case R.string.gesture_swipe_down_right:
+                return GestureFragment.TYPE_SWIPE_DOWN_RIGHT;
+            // swipe up
+            case R.string.gesture_swipe_up_left:
+                return GestureFragment.TYPE_SWIPE_UP_LEFT;
+            case R.string.gesture_swipe_up_middle:
+                return GestureFragment.TYPE_SWIPE_UP_MIDDLE;
+            case R.string.gesture_swipe_up_right:
+                return GestureFragment.TYPE_SWIPE_UP_RIGHT;
+            // special
+            case R.string.gesture_double_tap:
+                return GestureFragment.TYPE_DOUBLE_TAP;
+            case R.string.gesture_long_press:
+                return GestureFragment.TYPE_LONG_PRESS;
+            // nothing
+            default:
+                return LauncherApplication.getStr(R.string.gesture_nothing);
+        }
+    }
+
+    public static String getGestureById(final int gestureId) {
+        switch (gestureId) {
+            default:
+            case ActionProcessor.ACTION_NOTHING:
+                return LauncherApplication.getStr(R.string.gesture_nothing);
+            case ActionProcessor.ACTION_TURN_SCREEN_OFF:
+                return LauncherApplication.getStr(R.string.gesture_turn_screen_off);
+            case ActionProcessor.Action_TOGGLE_LAST_APP:
+                return LauncherApplication.getStr(R.string.gesture_toggle_last_app);
+            case ActionProcessor.ACTION_EXPAND_STATUSBAR:
+                return LauncherApplication.getStr(R.string.gesture_expand_status_bar);
+            case ActionProcessor.ACTION_TOGGLE_TORCH:
+                return LauncherApplication.getStr(R.string.gesture_toggle_torch);
+            case ActionProcessor.ACTION_TOGGLE_SILENT_MODE:
+                return LauncherApplication.getStr(R.string.gesture_toggle_silent_mode);
+            case ActionProcessor.ACTION_MUSIC_PLAY_PAUSE:
+                return LauncherApplication.getStr(R.string.gesture_music_play_pause);
+            case ActionProcessor.ACTION_MUSIC_PREVIOUS:
+                return LauncherApplication.getStr(R.string.gesture_music_previous);
+            case ActionProcessor.ACTION_MUSIC_NEXT:
+                return LauncherApplication.getStr(R.string.gesture_music_next);
         }
     }
 
@@ -74,9 +135,9 @@ public class ActionProcessor {
         pm.goToSleep(SystemClock.uptimeMillis());
     }
 
-    public static void collapseStatusBar(final Context context) {
-        final StatusBarManager sb = (StatusBarManager) context
-                .getSystemService(Context.STATUS_BAR_SERVICE);
+    public static void expandStatusBar(final Context context) {
+        final StatusBarManager sb = (StatusBarManager) context.getSystemService(
+                Context.STATUS_BAR_SERVICE);
         sb.expandNotificationsPanel();
     }
 
@@ -122,6 +183,14 @@ public class ActionProcessor {
                     : AudioManager.RINGER_MODE_SILENT);
         } else {
             am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+        }
+    }
+
+    public static void toggleLastApp(final Context context) {
+        try {
+            Utils.switchToLastApp(context);
+        } catch (RemoteException exc) {
+            Log.e(TAG, "could not switch to last app", exc);
         }
     }
 

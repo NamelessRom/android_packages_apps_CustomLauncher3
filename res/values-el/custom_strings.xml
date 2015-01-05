@@ -24,7 +24,7 @@
   <string name="gesture_swipe_up">Γρηγορη κίνηση πάνω</string>
   <string name="gesture_nothing">Τίποτα</string>
   <string name="gesture_turn_screen_off">Απενεργοποίηση οθόνης</string>
-  <string name="gesture_expand_statusbar">Επέκταση γραμμής κατάστασης</string>
+  <string name="gesture_expand_status_bar">Επέκταση γραμμής κατάστασης</string>
   <string name="gesture_toggle_torch">Εναλλάσων φακός</string>
   <string name="gesture_toggle_silent_mode">Εναλλαγή σε αθόρυβο</string>
   <string name="gesture_music_play_pause">Αναπαραγ./Παύση μουσικής</string>

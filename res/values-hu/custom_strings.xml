@@ -24,7 +24,7 @@
   <string name="gesture_swipe_up">Húzás felfelé</string>
   <string name="gesture_nothing">Semmi</string>
   <string name="gesture_turn_screen_off">Képernyő kikapcsolása</string>
-  <string name="gesture_expand_statusbar">Értesítő sáv kibontása</string>
+  <string name="gesture_expand_status_bar">Értesítő sáv kibontása</string>
   <string name="gesture_toggle_torch">Zseblámpa</string>
   <string name="gesture_toggle_silent_mode">Néma mód beállítása</string>
   <string name="gesture_music_play_pause">Zene lejátszás/szünet</string>

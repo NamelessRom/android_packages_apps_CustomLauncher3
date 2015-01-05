@@ -37,12 +37,13 @@
     <!-- Gesture actions -->
     <string name="gesture_nothing">Nothing</string>
     <string name="gesture_turn_screen_off">Turn screen off</string>
-    <string name="gesture_expand_statusbar">Expand status bar</string>
+    <string name="gesture_expand_status_bar">Expand status bar</string>
     <string name="gesture_toggle_torch">Toggle torch</string>
     <string name="gesture_toggle_silent_mode">Toggle silent mode</string>
     <string name="gesture_music_play_pause">Play/Pause music</string>
     <string name="gesture_music_previous">Previous song</string>
     <string name="gesture_music_next">Next song</string>
+    <string name="gesture_toggle_last_app">Toggle last app</string>
 
     <string name="global_settings">GLOBAL SETTINGS</string>
 
@@ -56,4 +57,6 @@
     <string name="hide_status_bar_title">Hide status bar</string>
     <string name="hide">Hide</string>
     <string name="show">Show</string>
+
+    <string name="no_last_app">No last app found!</string>
 </resources>

@@ -24,7 +24,7 @@
   <string name="gesture_swipe_up">Swipe up</string>
   <string name="gesture_nothing">Nothing</string>
   <string name="gesture_turn_screen_off">Turn screen off</string>
-  <string name="gesture_expand_statusbar">Expand status bar</string>
+  <string name="gesture_expand_status_bar">Expand status bar</string>
   <string name="gesture_toggle_torch">Toggle torch</string>
   <string name="gesture_toggle_silent_mode">Toggle silent mode</string>
   <string name="gesture_music_play_pause">Play/Pause music</string>

@@ -24,7 +24,7 @@
   <string name="gesture_swipe_up">Scorrere verso l\'alto</string>
   <string name="gesture_nothing">Niente</string>
   <string name="gesture_turn_screen_off">Spegni schermo</string>
-  <string name="gesture_expand_statusbar">Espandi la barra di stato</string>
+  <string name="gesture_expand_status_bar">Espandi la barra di stato</string>
   <string name="gesture_toggle_torch">Accendi/Spegni Torcia</string>
   <string name="gesture_toggle_silent_mode">Attiva/Disattiva Modalità Silenziosa</string>
   <string name="gesture_music_play_pause">Play/Pausa Musica</string>

@@ -24,7 +24,7 @@
   <string name="gesture_swipe_up">Svep uppåt</string>
   <string name="gesture_nothing">Ingenting</string>
   <string name="gesture_turn_screen_off">Stänga av skärmen</string>
-  <string name="gesture_expand_statusbar">Expandera statusfältet</string>
+  <string name="gesture_expand_status_bar">Expandera statusfältet</string>
   <string name="gesture_toggle_torch">Växla ficklampa</string>
   <string name="gesture_toggle_silent_mode">Tyst läge</string>
   <string name="gesture_music_play_pause">Spela/Pausa musik</string>

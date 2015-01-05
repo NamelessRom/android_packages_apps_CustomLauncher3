@@ -27,8 +27,8 @@ public abstract class BaseActionListener {
         ActionProcessor.turnScreenOff(getContext());
     }
 
-    public void collapseStatusBar() {
-        ActionProcessor.collapseStatusBar(getContext());
+    public void expandStatusBar() {
+        ActionProcessor.expandStatusBar(getContext());
     }
 
     public void toggleTorch() {
@@ -49,5 +49,9 @@ public abstract class BaseActionListener {
 
     public void musicNext() {
         ActionProcessor.musicNext(getContext());
+    }
+
+    public void toggleLastApp() {
+        ActionProcessor.toggleLastApp(getContext());
     }
 }

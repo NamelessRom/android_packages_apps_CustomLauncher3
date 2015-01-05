@@ -24,7 +24,7 @@
   <string name="gesture_swipe_up">Omhoog vegen</string>
   <string name="gesture_nothing">Niets</string>
   <string name="gesture_turn_screen_off">Scherm uitschakelen</string>
-  <string name="gesture_expand_statusbar">Statusbalk uitvouwen</string>
+  <string name="gesture_expand_status_bar">Statusbalk uitvouwen</string>
   <string name="gesture_toggle_torch">Zaklamp aan/uit</string>
   <string name="gesture_toggle_silent_mode">Stille modus aan/uit</string>
   <string name="gesture_music_play_pause">Muziek afspelen/pauzeren</string>

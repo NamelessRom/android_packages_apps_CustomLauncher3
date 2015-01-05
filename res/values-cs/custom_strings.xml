@@ -23,7 +23,7 @@
   <string name="gesture_swipe_up">Posunout nahoru</string>
   <string name="gesture_nothing">Nic</string>
   <string name="gesture_turn_screen_off">Vypnout obrazovku</string>
-  <string name="gesture_expand_statusbar">Rozbalit notifikační lištu</string>
+  <string name="gesture_expand_status_bar">Rozbalit notifikační lištu</string>
   <string name="gesture_toggle_torch">Rozsvítit baterku</string>
   <string name="gesture_toggle_silent_mode">Zapnout tichý režim</string>
   <string name="gesture_music_play_pause">Hrát/pozastavit hudbu</string>

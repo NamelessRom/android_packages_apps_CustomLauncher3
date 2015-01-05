@@ -23,7 +23,7 @@
   <string name="gesture_swipe_down">Glide ned</string>
   <string name="gesture_nothing">Intet</string>
   <string name="gesture_turn_screen_off">Sluk skærmen</string>
-  <string name="gesture_expand_statusbar">Udvid statuslinjen</string>
+  <string name="gesture_expand_status_bar">Udvid statuslinjen</string>
   <string name="gesture_toggle_torch">Tænd/sluk lommelygte</string>
   <string name="gesture_toggle_silent_mode">Toggle lydløs tilstand</string>
   <string name="gesture_music_play_pause">Afspil/Pause musik</string>

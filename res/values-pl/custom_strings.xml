@@ -24,7 +24,7 @@
   <string name="gesture_swipe_up">Przesuń palcem w górę</string>
   <string name="gesture_nothing">Nic nie rób</string>
   <string name="gesture_turn_screen_off">Wyłączyć ekran</string>
-  <string name="gesture_expand_statusbar">Rozwiń pasek stanu</string>
+  <string name="gesture_expand_status_bar">Rozwiń pasek stanu</string>
   <string name="gesture_toggle_torch">Przełącz latarkę</string>
   <string name="gesture_toggle_silent_mode">Przełącz tryb cichy</string>
   <string name="gesture_music_play_pause">Odtwórz/Zatrzymaj muzykę</string>
