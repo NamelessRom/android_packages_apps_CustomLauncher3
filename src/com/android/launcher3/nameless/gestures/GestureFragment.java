@@ -45,7 +45,6 @@ public class GestureFragment extends Fragment {
     public static final String TYPE_SWIPE_UP_MIDDLE = "type_swipe_up_middle";
     public static final String TYPE_SWIPE_UP_RIGHT = "type_swipe_up_right";
     public static final String TYPE_DOUBLE_TAP = "type_double_tap";
-    public static final String TYPE_LONG_PRESS = "type_long_press";
 
     private static final int POS_SWIPE_DOWN = 0;
     private static final int POS_SWIPE_UP = 1;
@@ -94,8 +93,7 @@ public class GestureFragment extends Fragment {
         };
 
         final int[] special = new int[]{
-                R.string.gesture_double_tap,
-                R.string.gesture_long_press
+                R.string.gesture_double_tap
         };
 
 

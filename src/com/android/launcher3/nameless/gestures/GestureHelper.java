@@ -50,7 +50,6 @@ public class GestureHelper {
 
     private static int sSector;
     private static int sTypeDoubleTap;
-    private static int sTypeLongPress;
     private static int sTypeSwipeDownLeft;
     private static int sTypeSwipeDownMiddle;
     private static int sTypeSwipeDownRight;
@@ -80,8 +79,6 @@ public class GestureHelper {
         log("updateActions");
         sTypeDoubleTap = SettingsProvider.getIntCustomDefault(context,
                 GestureFragment.TYPE_DOUBLE_TAP, ActionProcessor.ACTION_NOTHING);
-        sTypeLongPress = SettingsProvider.getIntCustomDefault(context,
-                GestureFragment.TYPE_LONG_PRESS, ActionProcessor.ACTION_NOTHING);
 
         sTypeSwipeDownLeft = SettingsProvider.getIntCustomDefault(context,
                 GestureFragment.TYPE_SWIPE_DOWN_LEFT, ActionProcessor.ACTION_NOTHING);
@@ -159,11 +156,6 @@ public class GestureHelper {
         public CustomGestureListener(final Context context, final BaseActionListener listener) {
             mContext = context;
             mListener = listener;
-        }
-
-        public boolean onLongPress() {
-            ActionProcessor.processAction(mListener, sTypeLongPress);
-            return true;
         }
 
         @Override

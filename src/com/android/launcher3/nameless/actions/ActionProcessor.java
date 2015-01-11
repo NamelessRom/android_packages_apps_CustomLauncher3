@@ -98,8 +98,6 @@ public class ActionProcessor {
             // special
             case R.string.gesture_double_tap:
                 return GestureFragment.TYPE_DOUBLE_TAP;
-            case R.string.gesture_long_press:
-                return GestureFragment.TYPE_LONG_PRESS;
             // nothing
             default:
                 return LauncherApplication.getStr(R.string.gesture_nothing);

@@ -3463,9 +3463,7 @@ public class Launcher extends Activity
                 if (mWorkspace.isInOverviewMode()) {
                     mWorkspace.startReordering(v);
                 } else {
-                    if (!mWorkspace.getGestureListener().onLongPress()) {
-                        mWorkspace.enterOverviewMode();
-                    }
+                    mWorkspace.enterOverviewMode();
                 }
             } else {
                 final boolean isAllAppsButton = inHotseat && isAllAppsButtonRank(
