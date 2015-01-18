@@ -33,6 +33,7 @@ import com.android.launcher3.LauncherApplication;
 import com.android.launcher3.R;
 import com.android.launcher3.nameless.Utils;
 import com.android.launcher3.nameless.gestures.GestureFragment;
+import com.android.launcher3.settings.SettingsProvider;
 
 public class ActionProcessor {
     private static final String TAG = "ActionProcessor";
@@ -126,6 +127,42 @@ public class ActionProcessor {
             case ActionProcessor.ACTION_MUSIC_NEXT:
                 return LauncherApplication.getStr(R.string.gesture_music_next);
         }
+    }
+
+    public static int getValueById(final Context context, final int type) {
+        final int value;
+        switch (type) {
+            // swipe down
+            case R.string.gesture_swipe_down_left:
+                value = ActionProcessor.ACTION_EXPAND_STATUSBAR;
+                break;
+            case R.string.gesture_swipe_down_middle:
+                value = ActionProcessor.ACTION_EXPAND_STATUSBAR;
+                break;
+            case R.string.gesture_swipe_down_right:
+                value = ActionProcessor.ACTION_EXPAND_STATUSBAR;
+                break;
+            // swipe up
+            case R.string.gesture_swipe_up_left:
+                value = ActionProcessor.ACTION_NOTHING;
+                break;
+            case R.string.gesture_swipe_up_middle:
+                value = ActionProcessor.ACTION_NOTHING;
+                break;
+            case R.string.gesture_swipe_up_right:
+                value = ActionProcessor.ACTION_NOTHING;
+                break;
+            // special
+            case R.string.gesture_double_tap:
+                value = ActionProcessor.ACTION_TURN_SCREEN_OFF;
+                break;
+            // nothing
+            default:
+                value = ActionProcessor.ACTION_NOTHING;
+                break;
+        }
+
+        return SettingsProvider.getIntCustomDefault(context, getType(type), value);
     }
 
     public static void turnScreenOff(final Context context) {

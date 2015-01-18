@@ -79,6 +79,7 @@ public class GestureHeaderAdapter extends PinnedHeaderListAdapter {
     protected void bindView(View v, int partition, Cursor cursor, int position) {
         final int titleId = cursor.getInt(1);
         final String type = ActionProcessor.getType(titleId);
+        final int value = ActionProcessor.getValueById(mContext, titleId);
         final ViewHolder viewHolder = new ViewHolder(type, v);
         final Resources res = mContext.getResources();
 
@@ -88,8 +89,7 @@ public class GestureHeaderAdapter extends PinnedHeaderListAdapter {
         }
 
         viewHolder.title.setText(titleId);
-        viewHolder.state.setText(ActionProcessor.getGestureById(
-                SettingsProvider.getIntCustomDefault(mContext, type, 0)));
+        viewHolder.state.setText(ActionProcessor.getGestureById(value));
 
         v.setTag(viewHolder);
         v.setOnClickListener(mSettingsItemListener);

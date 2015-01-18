@@ -77,15 +77,12 @@ public class GestureHelper {
 
     public void updateActions(final Context context) {
         log("updateActions");
-        sTypeDoubleTap = SettingsProvider.getIntCustomDefault(context,
-                GestureFragment.TYPE_DOUBLE_TAP, ActionProcessor.ACTION_NOTHING);
-
         sTypeSwipeDownLeft = SettingsProvider.getIntCustomDefault(context,
-                GestureFragment.TYPE_SWIPE_DOWN_LEFT, ActionProcessor.ACTION_NOTHING);
+                GestureFragment.TYPE_SWIPE_DOWN_LEFT, ActionProcessor.ACTION_EXPAND_STATUSBAR);
         sTypeSwipeDownMiddle = SettingsProvider.getIntCustomDefault(context,
-                GestureFragment.TYPE_SWIPE_DOWN_MIDDLE, ActionProcessor.ACTION_NOTHING);
+                GestureFragment.TYPE_SWIPE_DOWN_MIDDLE, ActionProcessor.ACTION_EXPAND_STATUSBAR);
         sTypeSwipeDownRight = SettingsProvider.getIntCustomDefault(context,
-                GestureFragment.TYPE_SWIPE_DOWN_RIGHT, ActionProcessor.ACTION_NOTHING);
+                GestureFragment.TYPE_SWIPE_DOWN_RIGHT, ActionProcessor.ACTION_EXPAND_STATUSBAR);
 
         sTypeSwipeUpLeft = SettingsProvider.getIntCustomDefault(context,
                 GestureFragment.TYPE_SWIPE_UP_LEFT, ActionProcessor.ACTION_NOTHING);
@@ -93,6 +90,9 @@ public class GestureHelper {
                 GestureFragment.TYPE_SWIPE_UP_MIDDLE, ActionProcessor.ACTION_NOTHING);
         sTypeSwipeUpRight = SettingsProvider.getIntCustomDefault(context,
                 GestureFragment.TYPE_SWIPE_UP_RIGHT, ActionProcessor.ACTION_NOTHING);
+
+        sTypeDoubleTap = SettingsProvider.getIntCustomDefault(context,
+                GestureFragment.TYPE_DOUBLE_TAP, ActionProcessor.ACTION_TURN_SCREEN_OFF);
     }
 
     public Gesture getGesture(float upX, float upY, float downX, float downY) {
@@ -156,6 +156,7 @@ public class GestureHelper {
         public CustomGestureListener(final Context context, final BaseActionListener listener) {
             mContext = context;
             mListener = listener;
+            GestureHelper.get(context).updateActions(context);
         }
 
         @Override
