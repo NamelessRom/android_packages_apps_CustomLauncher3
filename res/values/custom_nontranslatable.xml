@@ -15,6 +15,11 @@
      limitations under the License.
 -->
 <resources>
+    <!-- Application name -->
+    <string name="nameless_application_name" translatable="false">CustomLauncher3</string>
+    <!-- App version -->
+    <string name="nameless_application_version" translatable="false">1.0.2</string>
+
     <string name="gesture_swipe_down_left">@string/left</string>
     <string name="gesture_swipe_down_middle">@string/middle</string>
     <string name="gesture_swipe_down_right">@string/right</string>

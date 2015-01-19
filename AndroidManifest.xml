@@ -20,8 +20,8 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.android.launcher3"
-    android:versionName="@string/application_version"
-    android:versionCode="1000">
+    android:versionName="@string/nameless_application_version"
+    android:versionCode="1002">
 
     <original-package android:name="com.android.launcher3" />
 

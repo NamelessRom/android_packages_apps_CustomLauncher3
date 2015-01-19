@@ -15,11 +15,6 @@
      limitations under the License.
 -->
 <resources>
-    <!-- Application name -->
-    <string name="nameless_application_name">CustomLauncher3</string>
-    <!-- App copyright -->
-    <string name="application_copyright">Copyright \u00A9 2014 The CyanogenMod Project\nModifications Copyright \u00A9 2014 The NamelessRom Project</string>
-
     <!-- Gestures -->
     <string name="gesture_settings">Gestures</string>
     <string name="gesture_choose">Choose action</string>
