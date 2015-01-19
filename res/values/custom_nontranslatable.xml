@@ -16,7 +16,7 @@
 -->
 <resources>
     <!-- Application name -->
-    <string name="nameless_application_name" translatable="false">CustomLauncher3</string>
+    <string name="nameless_application_name" translatable="false">Perception</string>
     <!-- App version -->
     <string name="nameless_application_version" translatable="false">1.0.2</string>
 
